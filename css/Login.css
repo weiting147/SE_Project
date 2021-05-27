@@ -1,0 +1,140 @@
+/* 網頁的基礎背景設定*/
+*{
+    box-sizing: border-box;
+    font-family: Microsoft JhengHei;
+}
+body
+{   
+    background-color: #f3f3f3; 
+    font-family: Microsoft JhengHei;  /*設定成微軟正黑體*/   
+}
+
+/*上半部的部分*/
+.grayBlock{
+    background-color:#707070;
+    width: 100%;
+}
+.grayLi{
+    background-color: #8E8B8B;
+
+}
+.logo{
+    width: 70%;
+    padding-left: 0.5%;
+    padding-right: 50%;
+    padding-bottom: 0.5%;
+    padding-top:0.5%;
+    display: inline-block;
+    vertical-align:-webkit-baseline-middle;
+}
+.logoTEXT{
+    border: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 28px;
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+    font-weight: bold; /*字體粗體*/
+}
+/*中間的主要內容*/
+.menu{
+    padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.1rem;
+}
+.menu ul{
+    box-sizing: border-box;
+}
+
+.menu ul li{
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 1em 0.75em;
+}
+.menu a:hover{
+    color: #FCDC92;
+    text-decoration: underline;
+    /*cursor: pointer; /*a（連結）本身會自行設定*/
+}
+.lsttitle
+{
+    display:flex;
+    justify-content: space-between;
+    margin: 1em 2em 1em 0em;
+}
+.lst
+{   
+    
+    display:flex;
+    justify-content: space-between;
+    margin: 1em 1em 1em 0em;
+}
+.lst div
+{
+    text-align:left;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
+.lst:hover{
+    color: #FCDC92 !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.centerRegion
+{
+    width: 100%;
+} 
+.news
+{
+    width: 62%;
+    box-sizing: border-box;
+    padding: 1.5em 3em 1em 6em;
+    color: #707070;
+    text-align: center;
+    display:inline-block;
+    vertical-align: top;
+    border-right: #707070 solid 8px ;
+    font-size: large;
+}
+.news div .title{
+    font-size: 1.2rem;
+    padding-bottom: 1em;
+    font-weight: bold; /*粗體*/
+    color: #707070;
+}
+.login
+{
+    width: 35%;
+    /* background-color: black; */
+    display:inline-block;
+    vertical-align: top;
+    padding: 4em 3em 1em 3em;
+
+}
+.login div
+{
+    display:flex;
+    justify-content: space-between;
+    margin: 1em 0em 1em 0em;
+}
+.login a:hover
+{
+    color: #D10000;
+    text-decoration: underline;
+}
+.text
+{
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+    /* background-color: #aaaaaa; */
+    padding: 0em 8em 0em 3em;
+    color: #707070;
+}
+
+
+

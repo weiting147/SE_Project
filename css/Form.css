@@ -1,0 +1,177 @@
+/* 網頁的基礎背景設定*/
+*{
+    box-sizing: border-box;
+    font-family: Microsoft JhengHei;
+}
+body
+{   
+    background-color: #f3f3f3;   
+    font-family: Microsoft JhengHei;  /*設定成微軟正黑體*/
+}
+
+/*上半部的部分*/
+.grayBlock{
+    background-color:#707070;
+    width: 100%;
+}
+.grayLi{
+    background-color: #8E8B8B;
+
+}
+.logo{
+    width: 70%;
+    padding-left: 0.5%;
+    padding-right: 50%;
+    padding-bottom: 0.5%;
+    padding-top:0.5%;
+    display: inline-block;
+    vertical-align:-webkit-baseline-middle;
+}
+.logoTEXT{
+    border: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 28px;
+    display: inline-block;
+    vertical-align:-webkit-baseline-middle;
+    font-weight: bold; /*字體粗體*/
+}
+.menu{
+    padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.menu ul{
+    box-sizing: border-box;
+}
+
+.menu ul li{
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 1em 0.75em;
+}
+.menu a:hover{
+    color: #FCDC92;
+    text-decoration: underline;
+    /*cursor: pointer; /*a（連結）本身會自行設定*/
+}
+/* 管理帳戶/登出的選單部分 */
+.dropDown ul {
+    display: none;
+}
+.dropDown li:hover > ul {
+    display: block;
+    margin: 1em 0 0 -0.75em;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
+    background: #8E8B8B;
+    box-sizing: border-box;
+} 
+.dropDown li:hover > ul li {
+    display: block;
+} 
+
+/*中間的主要內容*/
+.centerRegion{
+    width: 100%;
+}
+.centerRegion .text .notice{
+    text-align: left;
+    margin: 25px 150px 40px 150px;
+    line-height: 1.5em;
+}
+.centerRegion .text{
+    box-sizing: border-box;
+    padding: 2em 3em;
+    color: #707070;
+    text-align: center;
+}
+.text .title{
+    font-size: 1.1rem;
+    font-weight: bold; /*粗體*/
+    color: black;
+}
+.centerRegion .text .content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 50px;
+}
+.centerRegion .text .content > p, .centerRegion .text .content > div {
+    width: 8em;
+    text-align: left;
+}
+.contentflex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.centerRegion .text .content .chooseflex, .centerRegion .text .content .stateflex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px 30px 0px;
+}
+.checkbox{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    
+}
+.checkbox img{
+    width: 100%;
+    cursor: pointer;
+}
+input[type="checkbox"] {
+    display: none; /*隱藏checkbox*/
+}
+  
+input[type="checkbox"] + label {
+    background-color: rgba(0,0,0,0);
+    width: 100px;
+    height: 85px;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+}
+  
+input[type="checkbox"] + label::after {
+    content: '';
+    background-image: url("../asset/checked3.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    top: -65px;
+    left: 60px;
+    margin-bottom: -40px;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+  
+input[type="checkbox"]:checked + label::after {
+    opacity: 1;
+}
+
+.content .stateflex img{
+    height: 85px;
+    width: 100px;
+}
+.checkbox .index, .content .stateflex .index{
+    font-size: 0.8em;
+    color: #707070;
+    text-align: left;
+}
+.centerRegion .text .checkbox .price, .content .stateflex .price{
+    font-size: 0.8em;
+    color: #707070;
+    text-align: center !important;
+}

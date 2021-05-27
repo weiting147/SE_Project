@@ -1,0 +1,108 @@
+/* 網頁的基礎背景設定*/
+*{
+    box-sizing: border-box;
+    font-family: Microsoft JhengHei;
+}
+body
+{   
+    background-color: #f3f3f3;
+    font-family: Microsoft JhengHei; /*設定成微軟正黑體*/
+}
+
+/*上半部的部分*/
+.grayBlock{
+    background-color:#707070;
+    width: 100%;
+}
+.grayLi{
+    background-color: #8E8B8B;
+
+}
+.logo{
+    width: 70%;
+    padding-left: 0.5%;
+    padding-right: 50%;
+    padding-bottom: 0.5%;
+    padding-top:0.5%;
+    display: inline-block;
+    vertical-align:-webkit-baseline-middle;
+}
+.logoTEXT{
+    border: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 28px;
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+    font-weight: bold; /*字體粗體*/
+}
+
+.menu{
+    padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.menu ul{
+    box-sizing: border-box;
+}
+
+.menu ul li{
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 1em 0.75em;
+}
+.menu a:hover{
+    color: #FCDC92;
+    text-decoration: underline;
+    /*cursor: pointer; /*a（連結）本身會自行設定*/
+}
+
+/*中間的主要內容*/
+.centerRegion
+{
+    width: 100%;
+}
+
+.centerRegion > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* margin-bottom: -1px; */
+}
+
+.centerRegion > div .text{
+    width: 40%;
+    box-sizing: border-box;
+    padding: 2em 3em;
+    color: #707070;
+}
+
+.text p{
+    margin-bottom: 1em;
+}
+
+.text .title{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.text .content{
+    line-height: 1.5em;
+    text-align: justify;
+}
+
+.text a:hover{
+    color:black;
+}
+
+.centerRegion > div .image{
+    width: 60%;
+}
+
+.centerRegion > div .image img{
+    width: 100%;
+}

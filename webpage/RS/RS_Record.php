@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
-
+<?php
+// 總之你一般使用者R，其它網頁改成 .php 後，通通加上下面這段 code 就對惹。
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("RS");
+?>
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/RS_Record.css" type="text/css" />

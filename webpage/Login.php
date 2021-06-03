@@ -1,5 +1,10 @@
 <!doctype html>
 <html>
+<?php
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+$isUser = LoginCheck();
+?>
 
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
@@ -85,22 +90,32 @@
 
         </div>
         <div class="login">
-            <div>帳號：</div>
-            <div><input type="text" name="account" style="width: 70%;"></div>
-            <div>密碼：</div>
-            <div><input type="text" name="password" style="width: 70%;"></div>
-            <div>
+            <form action="Login.php" method="POST">
+                <div>帳號：</div>
+                <div><input type="text" name="account" style="width: 70%;" value="<?php
+                                                                                    if ($_POST && $isUser == false)
+                                                                                        echo $_POST["account"];
+                                                                                    ?>">
+                </div>
+                <div>密碼：</div>
+                <div><input type="password" name="password" style="width: 70%;"></div>
                 <div>
-                    <a href="/webpage/RS/RS_Record.html"><button type="button">登入</button></a>
+                    <div>
+                        <input type="submit" value="登入">
+                    </div>
+                    <?php
+                    if ($_POST && $isUser == false)
+                        echo '<h3 style="color:red">輸入錯誤！</h3>';
+                    ?>
+                    <div class="text">
+                        <p style="text-align: center;">
+                            <font size="2">校內人士請使用<br>教務系統之帳號密碼 </font>
+                        </p>
+                    </div>
                 </div>
-                <div class="text">
-                    <p style="text-align: center;">
-                        <font size="2">校內人士請使用<br>教務系統之帳號密碼 </font>
-                    </p>
-                </div>
-            </div>
-            <span>尚未有帳密 &nbsp → &nbsp</span>
-            <a href="/webpage/RS/RS_AccountApply.html" style="font-weight: bold; ">註冊帳號</a>
+                <span>尚未有帳密 &nbsp → &nbsp</span>
+                <a href="/webpage/RS/RS_AccountApply.html" style="font-weight: bold; ">註冊帳號</a>
+            </form>
         </div>
 
     </div>

@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account` (
   `AID` varchar(16) NOT NULL,
   `Passwd` varchar(32) NOT NULL,
+  `identity` int NOT NULL,
   PRIMARY KEY (`AID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,6 +36,7 @@ CREATE TABLE `Account` (
 
 LOCK TABLES `Account` WRITE;
 /*!40000 ALTER TABLE `Account` DISABLE KEYS */;
+INSERT INTO `Account` VALUES ('A1075511','A1075511',0),('A1075521','A1075521',3),('A1075522','A1075522',1),('A1075535','A1075535',3),('A1075541','A1075541',2),('A1075543','A1075543',4);
 /*!40000 ALTER TABLE `Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -46,14 +48,12 @@ DROP TABLE IF EXISTS `Announcement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Announcement` (
-  `AID` varchar(16) NOT NULL,
-  `AnnouncementID` varchar(10) NOT NULL,
+  `identity` int NOT NULL,
+  `AnnounceID` varchar(10) NOT NULL,
   `ReleaseTime` timestamp NOT NULL,
-  `Title` varchar(16) NOT NULL,
+  `Title` varchar(32) NOT NULL,
   `Text` varchar(1024) NOT NULL,
-  PRIMARY KEY (`AnnouncementID`),
-  KEY `AID` (`AID`),
-  CONSTRAINT `Announcement_ibfk_1` FOREIGN KEY (`AID`) REFERENCES `Account` (`AID`)
+  PRIMARY KEY (`AnnounceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -121,6 +121,7 @@ CREATE TABLE `In_School_User` (
 
 LOCK TABLES `In_School_User` WRITE;
 /*!40000 ALTER TABLE `In_School_User` DISABLE KEYS */;
+INSERT INTO `In_School_User` VALUES ('A1075521',''),('A1075535','');
 /*!40000 ALTER TABLE `In_School_User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,6 +148,7 @@ CREATE TABLE `Normal_User` (
 
 LOCK TABLES `Normal_User` WRITE;
 /*!40000 ALTER TABLE `Normal_User` DISABLE KEYS */;
+INSERT INTO `Normal_User` VALUES ('A1075521','高嘉君','a1075521@mail.nuk.edu.tw','0000000000','桃園市'),('A1075535','曹瑋庭','a1075535@mail.nuk.edu.tw','0000000000','？？'),('A1075543','侯德威','a1075543@mail.nuk.edu.tw','0000000000','高雄市');
 /*!40000 ALTER TABLE `Normal_User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,6 +172,7 @@ CREATE TABLE `Out_School_User` (
 
 LOCK TABLES `Out_School_User` WRITE;
 /*!40000 ALTER TABLE `Out_School_User` DISABLE KEYS */;
+INSERT INTO `Out_School_User` VALUES ('A1075543','');
 /*!40000 ALTER TABLE `Out_School_User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-27 15:26:35
+-- Dump completed on 2021-06-03 22:50:11

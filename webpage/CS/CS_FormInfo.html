@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/css/Form.css" type="text/css" />
         
         <meta charset  = "utf-8">
-        <title>RS_RecordInfo</title>
+        <title>CS_FormInfo</title>
     </head>
     <body style = margin:0px>
         <!-- 網頁上方的工具列或訊息 -->
@@ -21,16 +21,16 @@
             <div style="background-color:#f5be11;padding:0.7%; margin: 0px; width: 100%; border: 0%"></div>
             <div class = "grayBlock menu">
                 <ul>
-                    <li><a href="RS_Form.html">租借場地</a></li>
-                    <li class = "grayLi"><a href="RS_Record.html">個人紀錄</a></li>
-                    <li><a href="RS_QueryPlace.html">場地使用狀況</a></li>
+                    <li><a href="CS_Unpaid.html">未繳費列表</a></li>
+                    <li><a href="CS_Unrefund.html">需退費列表</a></li>
+                    <li class="grayLi"><a href="CS_Record.html">歷史紀錄</a></li>
                 </ul>
                 <ul class = "dropDown">
                     <li><a>Hi,
-                            <span>使用者</span>
+                            <span>出納人員</span>
                         </a>
                         <ul>
-                            <li><a href="RS_AccountInfo.html">管理帳戶</a></li>
+                            <li><a href="CS_ModifyPasswd.html">密碼修改</a></li>
                             <li><a href="/webpage/Login.html">登出</a></li>
                         </ul>
                     </li>
@@ -40,47 +40,6 @@
 
         <!--中間區塊-->
         <div class = "centerRegion">
-            <div class = "text">
-                <p class = "title">
-                    當前訂單狀態
-                </p>
-                <div class = "state">
-                    <div>
-                        <div>
-                            <img src="/asset/竹籤去背.png" width="120px";/>
-                            <p class = "statetext">申請中</p>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 4em;">
-                        <img src="/asset/right-arrow.png" width="40px"/>
-                    </div>
-                    <div>
-                        <div>
-                            <img src="/asset/半隻烤肉串去背.png" width="120px"/>
-                            <p class = "statetext">已審核</p>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 4em;">
-                        <img src="/asset/right-arrow.png" width="40px"/>
-                    </div>
-                    <div>
-                        <div>
-                            <img src="/asset/整隻烤肉串去背.png" width="120px"/>
-                            <p class = "statetext">已繳費</p>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 4em;">
-                        <img src="/asset/right-arrow.png" width="40px"/>
-                    </div>
-                    <div>
-                        <div class = "grayscale"> <!-- 要灰階 -->
-                            <img src="/asset/整隻烤肉串&白芝麻去背.png" width="120px "/>
-                            <p class = "statetext">活動完成</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="background-color: #707070; width: 100%; height: 7px; margin-top: -1em;"></div>
             <div class = "text">
                 <div style="border: 2px #707070 solid; margin: 0px 100px; padding-top: 20px" >
                     <p class = "title">
@@ -290,9 +249,7 @@
                 </div>
                 <!-- 確認鍵 -->
                 <div>
-                    <a href = "RS_Record.html"><button type="button" style="cursor: pointer; margin:2em 2em 0 0;">確認</button></a>
-                    <a href = "RS_FormModify.html"><button type="button" style="cursor: pointer; margin-top: 2em;">修改訂單</button></a>
-                    <a href = "RS_FormCancelCheck.html"><button type="button" style="cursor: pointer; margin: 2em 0 0 2em">取消訂單</button></a>
+                    <a href = "CS_Record.html"><button type="button" style="cursor: pointer; margin-top: 2em">確認</button></a>
                 </div>
             </div>
         </div>

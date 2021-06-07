@@ -8,7 +8,7 @@ CheckEntry("RS");
 ?>
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
-    <link rel="stylesheet" href="/css/RS_Record.css" type="text/css" />
+    <link rel="stylesheet" href="/css/Record.css" type="text/css" />
 
     <meta charset="utf-8">
     <title>RS_Record</title>

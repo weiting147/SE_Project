@@ -1,12 +1,17 @@
 <!doctype html>
 <html>
-
+<?php
+// 總之你系統管理員R，其它網頁改成 .php 後，通通加上下面這段 code 就對惹。
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("SAS");
+?>
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/SAS.css" type="text/css" />
 
     <meta charset="utf-8">
-    <title>SAS_Archive</title>
+    <title>SAS_File</title>
 </head>
 
 <body style=margin:0px>
@@ -42,15 +47,70 @@
     </header>
 
     <!--中間區塊-->
-
     <div class="centerRegion">
-        <div class="text">
-            <p class="reply" style="padding: 2em 0;">
-                歸檔成功！
-            </p>
 
-            <div class="bottom" style="text-align: center;">
-                <a href="SAS_File.html"><button type="button" style="cursor: pointer;">確認</button></a>
+        <div class="text">
+            <p class="title">
+                <span>歸檔</span>
+            </p>
+            <div style="margin:1em 0em">
+                <span><input id="date" type="date"></span>
+                <input type="button" value="歸檔" onclick="location.href='SAS_ArchiveReply.html'" style="cursor: pointer;">
+            </div>
+            <!-- 列表內容 -->
+            <div class="lst" style="margin-bottom: 1em; font-weight: bold;color: black;">
+                <div> 租借起始日</div>
+                <div> 申請人</div>
+                <div>填寫日期</div>
+                <div>訂單編號</div>
+                <div>申請爐數</div>
+                <div>申請營位數量</div>
+                <div>訂單狀態</div>
+                <div>租借金額</div>
+            </div>
+
+            <div class="lst" style="margin-bottom: 1em;color: #707070;">
+                <div> 2000/12/18</div>
+                <div> 高XX</div>
+                <div>2000/12/01</div>
+                <div>11111111</div>
+                <div>3</div>
+                <div>0</div>
+                <div>尚未審核</div>
+                <div>87</div>
+            </div>
+
+            <div class="lst" style="margin-bottom: 1em; color: #707070;">
+                <div> 2000/12/18</div>
+                <div> 高XX</div>
+                <div>2000/12/01</div>
+                <div>11111111</div>
+                <div>3</div>
+                <div>0</div>
+                <div>繳費完成</div>
+                <div>87</div>
+            </div>
+
+            <div class="lst" style="margin-bottom: 1em; color: #707070;">
+                <div> 2000/12/18</div>
+                <div> 高XX</div>
+                <div>2000/12/01</div>
+                <div>11111111</div>
+                <div>3</div>
+                <div>0</div>
+                <div>活動結束</div>
+                <div>87</div>
+            </div>
+
+            <div class="lst" style="margin-bottom: 1em; color: #707070;">
+                <div> 2000/12/18</div>
+                <div> 高XX</div>
+                <div>2000/12/01</div>
+                <div>11111111</div>
+                <div>3</div>
+                <div>0</div>
+                <div>活動結束</div>
+                <div>87</div>
             </div>
         </div>
     </div>

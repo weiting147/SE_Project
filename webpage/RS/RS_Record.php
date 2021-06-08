@@ -15,7 +15,7 @@ CheckEntry("RS");
         <title>RS_Record</title>
     </head>
 
-    <body style=m argin:0px>
+    <body style=margin:0px>
         <!-- 網頁上方的工具列或訊息 -->
         <header>
             <!--高大logo-->

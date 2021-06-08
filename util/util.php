@@ -42,8 +42,8 @@ function LoginCheck()
             else if ($row[2] == 1) {
                 echo "場地管理員";
             }
-            else if ($row[3] == 2) {
-                echo "出納人員";
+            else if ($row[2] == 2) {
+                header("Location:CS/CS_Unpaid.php");
             }
             else {
                 header("Location:RS/RS_Record.php");

@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+// 總之你出納人員R，其它網頁改成 .php 後，通通加上下面這段 code 就對惹。
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("CS");
+?>
 <html>
     <head>
         <link rel="stylesheet" href="/css/reset.css" type="text/css" />

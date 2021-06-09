@@ -40,7 +40,7 @@ function LoginCheck()
             }
             // TODO 
             else if ($row[2] == 1) {
-                echo "場地管理員";
+                header("Location:PAS/PAS_FormManage.php");
             }
             else if ($row[2] == 2) {
                 header("Location:CS/CS_Unpaid.php");

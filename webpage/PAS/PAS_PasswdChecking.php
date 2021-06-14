@@ -1,4 +1,9 @@
 <!doctype html>
+<?php
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("PAS");
+?>
 <html>
 <script>
     function check_all(obj, cName) {

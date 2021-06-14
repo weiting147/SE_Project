@@ -25,8 +25,7 @@ DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account` (
   `AID` varchar(16) NOT NULL,
   `Passwd` varchar(32) NOT NULL,
-  `identity` int NOT NULL,
-  PRIMARY KEY (`AID`)
+  `identity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,8 +51,7 @@ CREATE TABLE `Announcement` (
   `AnnounceID` varchar(10) NOT NULL,
   `ReleaseTime` timestamp NOT NULL,
   `Title` varchar(32) NOT NULL,
-  `Text` varchar(1024) NOT NULL,
-  PRIMARY KEY (`AnnounceID`)
+  `Text` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -196,6 +194,7 @@ CREATE TABLE `Place` (
 
 LOCK TABLES `Place` WRITE;
 /*!40000 ALTER TABLE `Place` DISABLE KEYS */;
+INSERT INTO `Place` VALUES ('BBQ001',300),('BBQ002',300),('BBQ003',300),('Camp001',100),('Camp002',100),('Camp003',100);
 /*!40000 ALTER TABLE `Place` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-03 22:50:11
+-- Dump completed on 2021-06-14 12:10:53

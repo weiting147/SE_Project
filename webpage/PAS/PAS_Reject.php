@@ -26,15 +26,15 @@ function check_all(obj,cName){
 
         <div style="padding-left: 3%;" display: inline-block>
             <img src="/asset/logoword_.png" class="logo">
-            <a href="PAS_FormManage.html" class="logoTEXT">烤肉露營區管理系統</a>
+            <a href="PAS_FormManage.php" class="logoTEXT">烤肉露營區管理系統</a>
         </div>
         <div style="background-color:#f5be11;padding:0.7%; margin: 0px; width: 100%; border: 0%"></div>
         <div class="grayBlock menu">
             <ul>
-                <li class="grayLi"><a href="PAS_FormManage.html">申請批准</a></li>
-                <li><a href="PAS_Record.html">租借紀錄</a></li>
-                <li><a href="PAS_PlaceManage.html">場地管理</a></li>
-                <li><a href="PAS_AnnouncementManage.html">公告</a></li>
+                <li class="grayLi"><a href="PAS_FormManage.php">申請批准</a></li>
+                <li><a href="PAS_Record.php">租借紀錄</a></li>
+                <li><a href="PAS_PlaceManage.php">場地管理</a></li>
+                <li><a href="PAS_AnnouncementManage.php">公告</a></li>
             </ul>
             <!-- 下拉式選單 -->
             <ul class="dropDown">
@@ -42,8 +42,8 @@ function check_all(obj,cName){
                         <span>場地管理員</span>
                     </a>
                     <ul>
-                        <li><a href="PAS_ModifyPasswd.html">修改密碼</a></li>
-                        <li><a href="/webpage/Login.html">登出</a></li>
+                        <li><a href="PAS_ModifyPasswd.php">修改密碼</a></li>
+                        <li><a href="/webpage/Login.php">登出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -88,9 +88,9 @@ function check_all(obj,cName){
             </div>
             <!-- 確認鍵 -->
             <div>
-                <a href="PAS_FormManage.html"><button type="button"
+                <a href="PAS_FormManage.php"><button type="button"
                         style="cursor: pointer; margin:1em 1em;">返回</button></a>
-                <a href="PAS_FormManage.html"><button type="button" 
+                <a href="PAS_FormManage.php"><button type="button" 
                         style="cursor: pointer; margin:1em 1em;">確認</button></a>
             </div>
         </div>

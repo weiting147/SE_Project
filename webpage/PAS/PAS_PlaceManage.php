@@ -3,6 +3,14 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
+$BBQ_PlaceQuery = <<<EOF
+            Select * From Place Where Place_ID Like 'BBQ%' ;
+        EOF;
+$Camp_PlaceQuery = <<<EOF
+        Select * From Place Where Place_ID Like 'Camp%' ;
+    EOF;
+$BBQ_Tables = GetQueryTable($BBQ_PlaceQuery);
+$Camp_Tables = GetQueryTable($Camp_PlaceQuery);
 ?>
 <html>
 
@@ -19,18 +27,18 @@ CheckEntry("PAS");
     <header>
         <!--高大logo-->
         <div class="grayBlock" style="padding:1.2%"></div>
-        
+
         <div style="padding-left: 3%;" display: inline-block>
             <img src="/asset/logoword_.png" class="logo">
-            <a href="PAS_FormManage.html" class="logoTEXT">烤肉露營區管理系統</a>
+            <a href="PAS_FormManage.php" class="logoTEXT">烤肉露營區管理系統</a>
         </div>
         <div style="background-color:#f5be11;padding:0.7%; margin: 0px; width: 100%; border: 0%"></div>
         <div class="grayBlock menu">
             <ul>
-                <li><a href="PAS_FormManage.html">申請批准</a></li>
-                <li><a href="PAS_Record.html">租借紀錄</a></li>
-                <li class="grayLi"><a href="PAS_PlaceManage.html">場地管理</a></li>
-                <li><a href="PAS_AnnouncementManage.html">公告</a></li>
+                <li><a href="PAS_FormManage.php">申請批准</a></li>
+                <li><a href="PAS_Record.php">租借紀錄</a></li>
+                <li class="grayLi"><a href="PAS_PlaceManage.php">場地管理</a></li>
+                <li><a href="PAS_AnnouncementManage.php">公告</a></li>
             </ul>
             <!-- 下拉式選單 -->
             <ul class="dropDown">
@@ -38,8 +46,8 @@ CheckEntry("PAS");
                         <span>系統管理員</span>
                     </a>
                     <ul>
-                        <li><a href="PAS_ModifyPasswd.html">修改密碼</a></li>
-                        <li><a href="/webpage/Login.html">登出</a></li>
+                        <li><a href="PAS_ModifyPasswd.php">修改密碼</a></li>
+                        <li><a href="/webpage/Login.php">登出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -62,55 +70,44 @@ CheckEntry("PAS");
                 <div></div>
                 <div></div>
                 <div>
-                    <input type="button" value="新增場地" onclick="location.href = 'PAS_CreatePlace.html'" style="cursor: pointer;">
+                    <input type="button" value="新增場地" onclick="location.href = 'PAS_CreatePlace.php'" style="cursor: pointer;">
                 </div>
             </div>
             <div style="border: 2px #707070 solid; margin: 50px 150px; padding: 20px 50px ;">
                 <p class="title">烤肉區</p>
-                
+
                 <div>
                     <div class="lst" style="margin: 1em; font-weight: bold;color: black;text-align:center;">
-                        <div></div><div></div>
+                        <div></div>
+                        <div></div>
                         <div>編號</div>
                         <div>價格</div>
-                        <div></div><div></div>
-                        <div></div><div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                 </div>
-                <div class="lst" style="margin: 1em ;color: #707070;">
-                    <div></div><div></div>
-                    <div>BBQ0001</div>
-                    <div>30</div>
-                    <div><input type="button" value="修改" 
-                        onclick="location.href = 'PAS_ModifyPlace.html'" 
-                        style="cursor: pointer;"></div>
-                    <div><input type="button" value="刪除" 
-                        onclick="location.href = 'PAS_DeletePlaceCheck.html'" 
-                        style="cursor: pointer;"></div>
-                <div></div><div></div>
-                </div>
-                <div class="lst" style="margin: 1em ;color: #707070;">
-                    <div></div><div></div>
-                    <div>BBQ0002</div>
-                    <div>30</div>
-                    <div><input type="button" value="修改" onclick="location.href = 'PAS_ModifyPlace.html'" style="cursor: pointer;">
-                    </div>
-                    <div><input type="button" value="刪除" onclick="location.href = 'PAS_DeletePlaceCheck.html'" style="cursor: pointer;">
-                    </div>
-                    <div></div><div></div>
-                </div>
-                <div class="lst" style="margin: 1em ;color: #707070;">
-                    <div></div>
-                    <div></div>
-                    <div>BBQ0003</div>
-                    <div>30</div>
-                    <div><input type="button" value="修改" onclick="location.href = 'PAS_ModifyPlace.html'" style="cursor: pointer;">
-                    </div>
-                    <div><input type="button" value="刪除" onclick="location.href = 'PAS_DeletePlaceCheck.html'" style="cursor: pointer;">
-                    </div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <?php
+                $row = NULL;
+                while ($row = mysqli_fetch_row($BBQ_Tables)) {
+                    echo <<<EOF
+                        <div class="lst" style="margin: 1em ;color: #707070;">
+                            <div></div><div></div>
+                            <div>$row[0]</div>
+                            <div>$row[1]</div>
+                            <div><input type="button" value="修改" 
+                            onclick="location.href = 'PAS_ModifyPlace.php'" 
+                            style="cursor: pointer;"></div>
+                            <div><input type="button" value="刪除" 
+                            onclick="location.href = 'PAS_DeletePlaceCheck.php'" 
+                            style="cursor: pointer;"></div>
+                            <div></div><div></div>
+                        </div>
+                        EOF;
+                }
+                ?>
+
             </div>
 
             <!--露營區-->
@@ -128,46 +125,27 @@ CheckEntry("PAS");
                         <div></div>
                     </div>
                 </div>
-                <div class="lst" style="margin: 1em ;color: #707070;">
-                    <div></div>
-                    <div></div>
-                    <div>camp0001</div>
-                    <div>30</div>
-                    <div><input type="button" value="修改" onclick="location.href = 'PAS_ModifyPlace.html'" style="cursor: pointer;">
-                    </div>
-                    <div><input type="button" value="刪除" onclick="location.href = 'PAS_DeletePlaceCheck.html'"
+                <?php
+                $row = NULL;
+                while ($row = mysqli_fetch_row($Camp_Tables)) {
+                    echo <<<EOF
+                        <div class="lst" style="margin: 1em ;color: #707070;">
+                            <div></div><div></div>
+                            <div>$row[0]</div>
+                            <div>$row[1]</div>
+                            <div><input type="button" value="修改" 
+                            onclick="location.href = 'PAS_ModifyPlace.php'" 
                             style="cursor: pointer;"></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="lst" style="margin: 1em ;color: #707070;">
-                    <div></div>
-                    <div></div>
-                    <div>camp0002</div>
-                    <div>30</div>
-                    <div><input type="button" value="修改" onclick="location.href = 'PAS_ModifyPlace.html'" style="cursor: pointer;">
-                    </div>
-                    <div><input type="button" value="刪除" onclick="location.href = 'PAS_DeletePlaceCheck.html'"
-                            style="cursor: pointer;">
-                    </div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="lst" style="margin: 1em ;color: #707070;">
-                    <div></div>
-                    <div></div>
-                    <div>camp0003</div>
-                    <div>30</div>
-                    <div><input type="button" value="修改" onclick="location.href = 'PAS_ModifyPlace.html'" style="cursor: pointer;">
-                    </div>
-                    <div><input type="button" value="刪除" onclick="location.href = 'PAS_DeletePlaceCheck.html'"
-                            style="cursor: pointer;">
-                    </div>
-                    <div></div>
-                    <div></div>
-                </div>
+                            <div><input type="button" value="刪除" 
+                            onclick="location.href = 'PAS_DeletePlaceCheck.php'" 
+                            style="cursor: pointer;"></div>
+                            <div></div><div></div>
+                        </div>
+                        EOF;
+                }
+                ?>
             </div>
-            
+
         </div>
     </div>
 

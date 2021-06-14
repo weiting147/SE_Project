@@ -32,13 +32,12 @@ function LoginCheck()
             }
         }
         if ($isUser) {
-            // 設置 cookie 為10分鐘
-            setcookie("account", $_POST["account"], time() + 600);
+            // 設置 cookie 為60分鐘
+            setcookie("account", $_POST["account"], time() + 3600);
             setcookie("identity", $row[2], time() + 3600);
             if ($row[2] == 0) {
                 header("Location:SAS/SAS_File.php");
             }
-            // TODO 
             else if ($row[2] == 1) {
                 header("Location:PAS/PAS_FormManage.php");
             }
@@ -66,14 +65,22 @@ function CheckEntry($subsystem) {
         echo "Error Entry";
         exit();
     }
-    // TODO 
+    else if ($subsystem == "CS" && $_COOKIE["identity"] != 2) {
+        echo "Error Entry";
+        exit();
+    }
+    else if ($subsystem == "PAS" && $_COOKIE["identity"] != 1) {
+        echo "Error Entry";
+        exit();
+    }
 }
 
 function GetQueryTable($query)
 {
-    $db = mysqli_connect();
+    $db = mysqli_connect('localhost', 'A10755demo', 'A10755demo', 'cbs_db');
 
     if (!$db) {
+        echo "Error!";
         exit();
     }
 
@@ -87,4 +94,23 @@ function GetQueryTable($query)
     mysqli_close($db);
 
     return $returnTable;
+}
+
+function sendQuery($query) {
+    $db = mysqli_connect('localhost', 'A10755demo', 'A10755demo', 'cbs_db');
+
+    if (!$db) {
+        echo "Error!";
+        exit();
+    }
+    $successful = mysqli_query($db, $query);
+
+    if (!$successful) {
+        mysqli_close($db);
+        echo "Query Error";
+        exit();
+    }
+    mysqli_close($db);
+
+    return $successful;
 }

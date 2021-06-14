@@ -4,6 +4,21 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 $isUser = LoginCheck();
+if ($_COOKIE["account"]) {
+    if ($_COOKIE["identity"] >= 3) {
+        header("Location:RS/RS_Record.php");
+    }
+    else if ($_COOKIE["identity"] == 0) {
+        header("Location:SAS/SAS_File.php");
+    }
+    else if ($_COOKIE["identity"] == 2) {
+        header("Location:CS/CS_Unpaid.php");
+    }
+    else if ($_COOKIE["identity"] == 1) {
+        header("Location:PAS/PAS_FormManage.php");
+    }
+}
+
 ?>
 
 <head>

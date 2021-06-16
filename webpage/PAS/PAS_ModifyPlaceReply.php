@@ -3,6 +3,12 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
+$placeID = $_POST["placeID"];
+$price = $_POST["price"];
+$modifyQuery = <<<EOF
+    Update Place Set price = $price Where Place_ID= '$placeID';
+EOF;
+$ret = sendQuery($modifyQuery);
 ?>
 <html>
 
@@ -50,7 +56,12 @@ CheckEntry("PAS");
     <div class="centerRegion">
         <div class="text">
             <p class="reply" style="padding: 2em 0;">
-                修改成功
+                <?php
+                if ($ret)
+                    echo "修改成功";
+                else
+                    echo "修改失敗";
+                ?>
             </p>
 
             <div class="bottom" style="text-align: center;">

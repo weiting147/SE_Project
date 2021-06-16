@@ -5,6 +5,7 @@ require('util.php');
 CheckEntry("PAS");
 ?>
 <html>
+
 <head>
     <script type="text/javascript">
         function CreatePlaceChecking(form) {
@@ -75,33 +76,31 @@ CheckEntry("PAS");
             <p class="title">
                 <span>新增場地</span>
             </p>
-            <form name="CreatePlace" action="PAS_CreatePlaceReply.php" method="POST" onsubmit="return CreatePlaceChecking(this);">
-            <div class="text-left">
-                <div style="border: 2px #707070 solid; margin: 0px 300px; padding: 20px 50px ;">
-                    <div class="content">
-                        場地種類：
-                        <input type="radio" id="place_type" name="type" readonly="readonly" value="露營區" />
-                        <label for="r1">&nbsp; 露營區</label>
-                        <input type="radio" id="place_type" name="type" readonly="readonly" value="烤肉區" />
-                        <label for="r1">&nbsp; 烤肉區</label>
-                    </div>
-                    <div class="content">
-                        <p>價格：</p>
-                        <input type="text" name="price" style="width: 18em;"/>
-                    </div>
-                    <div class="content">
-                        <p>數量：</p>
-                        <input type="text" name="number" style="width: 18em;"/>
+            <form action="PAS_CreatePlaceReply.php" method="POST" onsubmit="return CreatePlaceChecking(this);">
+                <div class="text-left">
+                    <div style="border: 2px #707070 solid; margin: 0px 300px; padding: 20px 50px ;">
+                        <div class="content">
+                            場地種類：
+                            <input type="radio" id="place_type" name="type" readonly="readonly" value="露營區" />
+                            <label for="r1">&nbsp; 露營區</label>
+                            <input type="radio" id="place_type" name="type" readonly="readonly" value="烤肉區" />
+                            <label for="r1">&nbsp; 烤肉區</label>
+                        </div>
+                        <div class="content">
+                            <p>價格：</p>
+                            <input type="text" style="text-align:right" name="price" style="width: 18em;" />
+                        </div>
+                        <div class="content">
+                            <p>數量：</p>
+                            <input type="text" style="text-align:right" name="number" style="width: 18em;" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- 確認鍵 -->
-            <div>
-                <a href="PAS_PlaceManage.php"><button type="button"
-                        style="cursor: pointer; margin:1em 1em;">返回</button></a>
-                <input type="submit"
-                        style="cursor: pointer; margin:1em 1em;" value="確認">
-            </div>
+                <!-- 確認鍵 -->
+                <div>
+                    <a href="PAS_PlaceManage.php"><button type="button" style="cursor: pointer; margin:1em 1em;">返回</button></a>
+                    <input type="submit" style="cursor: pointer; margin:1em 1em;" value="確認">
+                </div>
             </form>
         </div>
     </div>

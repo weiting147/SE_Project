@@ -54,24 +54,19 @@ function LoginCheck()
 
 function CheckEntry($subsystem) {
     if (!$_COOKIE["account"]) {
-        echo "Error Entry";
-        exit();
+        header("Location:/index.php");
     }
     if ($subsystem == "RS" && $_COOKIE["identity"] < 3) {
-        echo "Error Entry";
-        exit();
+        header("Location:/index.php");
     }
     else if ($subsystem == "SAS" && $_COOKIE["identity"] != 0) {
-        echo "Error Entry";
-        exit();
+        header("Location:i/ndex.php");
     }
     else if ($subsystem == "CS" && $_COOKIE["identity"] != 2) {
-        echo "Error Entry";
-        exit();
+        header("Location:/index.php");
     }
     else if ($subsystem == "PAS" && $_COOKIE["identity"] != 1) {
-        echo "Error Entry";
-        exit();
+        header("Location:/index.php");
     }
 }
 

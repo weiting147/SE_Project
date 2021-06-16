@@ -7,6 +7,22 @@ CheckEntry("PAS");
 <html>
 
 <head>
+    <script type="text/javascript">
+        function ModifyPlaceChecking(form) {
+            let priceFlag = true;
+            if (!form.price.value) {
+                alert("未填入「價錢」");
+                return false;
+            }
+            if (form.price.value > 1000 || form.price.value < 100) {
+                msg += "價錢須介於 100~1000 之間\n";
+                priceFlag = false;
+            }
+            if (msg != "")
+                alert(msg);
+            return priceFlag;
+        }
+    </script>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/PAS.css" type="text/css" />
 
@@ -51,34 +67,28 @@ CheckEntry("PAS");
 
         <div class="text">
             <p class="title">
-                <span>新增場地</span>
+                <span>修改場地</span>
             </p>
-            <div class="text-left">
-                <div style="border: 2px #707070 solid; margin: 0px 300px; padding: 20px 50px ;">
-                    <div class="content">
-                        場地種類：
-                        <input type="radio" id="r1" name="r1" readonly="readonly" />
-                        <label for="r1">&nbsp; 露營區</label>
-                        <input type="radio" id="r1" name="r1" readonly="readonly" />
-                        <label for="r1">&nbsp; 烤肉區</label>
-                    </div>
-                    <div class="content">
-                        <p> 價格：</p>
-                        <input type="text" style="width: 18em;" readonly="readonly" />
-                    </div>
-                    <div class="content">
-                        <p>數量：</p>
-                        <input type="text" style="width: 18em;" readonly="readonly" />
+            <form action="PAS_ModifyPlaceReply.php" method="POST" onsubmit="return ModifyPlaceChecking(this);">
+                <div class="text-left">
+                    <div style="border: 2px #707070 solid; margin: 0px 300px; padding: 20px 50px ;">
+                        <div class="content">
+                            場地名稱：
+                            <input type="hidden" name="placeID" value="<?php echo $_POST["placeID"]; ?>">
+                            <label for="r1">&nbsp; <?php echo $_POST["placeID"]; ?></label>
+                        </div>
+                        <div class="content">
+                            <p> 價格：</p>
+                            <input type="text" style="width: 18em;text-align:right" name="price" value="<?php echo $_POST["price"]; ?>" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- 確認鍵 -->
-            <div>
-                <a href="PAS_PlaceManage.php"><button type="button"
-                        style="cursor: pointer; margin:1em 1em;">返回</button></a>
-                <a href="PAS_ModifyPlaceReply.php"><button type="button"
-                        style="cursor: pointer; margin:1em 1em;">確認修改</button></a>
-            </div>
+                <!-- 確認鍵 -->
+                <div>
+                    <a href="PAS_PlaceManage.php"><button type="button" style="cursor: pointer; margin:1em 1em;">返回</button></a>
+                    <input type="submit" style="cursor: pointer; margin:1em 1em;" value="確認修改">
+                </div>
+            </form>
         </div>
     </div>
 

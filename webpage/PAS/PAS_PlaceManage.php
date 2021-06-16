@@ -96,12 +96,20 @@ $Camp_Tables = GetQueryTable($Camp_PlaceQuery);
                             <div></div><div></div>
                             <div>$row[0]</div>
                             <div>$row[1]</div>
-                            <div><input type="button" value="修改" 
-                            onclick="location.href = 'PAS_ModifyPlace.php'" 
-                            style="cursor: pointer;"></div>
-                            <div><input type="button" value="刪除" 
-                            onclick="location.href = 'PAS_DeletePlaceCheck.php'" 
-                            style="cursor: pointer;"></div>
+                            <div>
+                            <form action="PAS_ModifyPlace.php" method="POST">
+                            <input type="hidden" name="placeID" value="$row[0]">
+                            <input type="hidden" name="price" value="$row[1]">
+                            <input type="submit" value="修改" style="cursor: pointer;">
+                            </form>
+                            </div>
+                            <div>
+                            <form action="PAS_DeletePlaceCheck.php" method="POST">
+                            <input type="hidden" name="placeID" value="$row[0]">
+                            <input type="hidden" name="price" value="$row[1]">
+                            <input type="submit" value="刪除" style="cursor: pointer;">
+                            </form>
+                            </div>
                             <div></div><div></div>
                         </div>
                         EOF;
@@ -133,12 +141,20 @@ $Camp_Tables = GetQueryTable($Camp_PlaceQuery);
                             <div></div><div></div>
                             <div>$row[0]</div>
                             <div>$row[1]</div>
-                            <div><input type="button" value="修改" 
-                            onclick="location.href = 'PAS_ModifyPlace.php'" 
-                            style="cursor: pointer;"></div>
-                            <div><input type="button" value="刪除" 
-                            onclick="location.href = 'PAS_DeletePlaceCheck.php'" 
-                            style="cursor: pointer;"></div>
+                            <div>
+                            <form action="PAS_ModifyPlace.php" method="POST">
+                            <input type="hidden" name="placeID" value="$row[0]">
+                            <input type="hidden" name="price" value="$row[1]">
+                            <input type="submit" value="修改" style="cursor: pointer;">
+                            </form>
+                            </div>
+                            <div>
+                            <form action="PAS_PAS_DeletePlaceCheck.php" method="POST">
+                            <input type="hidden" name="placeID" value="$row[0]">
+                            <input type="hidden" name="price" value="$row[1]">
+                            <input type="submit" value="刪除" style="cursor: pointer;">
+                            </form>
+                            </div>
                             <div></div><div></div>
                         </div>
                         EOF;

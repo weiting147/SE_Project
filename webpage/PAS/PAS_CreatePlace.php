@@ -11,8 +11,8 @@ CheckEntry("PAS");
             let priceFlag = true;
             let numberFlag = true;
             let msg = "";
-            if (!form.price.value || !form.number.value) {
-                alert("未填入「價錢」或「場地數量」");
+            if (!form.price.value || !form.number.value || !form.type.value) {
+                alert("未填入「場地種類」,「價錢」或「場地數量」");
                 return false;
             }
             if (form.price.value > 1000 || form.price.value < 100) {

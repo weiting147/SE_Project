@@ -9,6 +9,42 @@ foreach ($_POST as $key => $value) {
 }
 */
 // TODO
+$BBQ_PlaceQuery = <<<EOF
+            Select * From Place Where Place_ID Like 'BBQ%' Order By Place_ID;
+        EOF;
+$Camp_PlaceQuery = <<<EOF
+        Select * From Place Where Place_ID Like 'Camp%' Order By Place_ID;
+    EOF;
+$Place_Tables = NULL;
+$Place_type_str = NULL;
+$create_number = strval($_POST["number"]);
+$price = $_POST["price"];
+if ($_POST["type"] == "露營區") {
+    $Place_Tables = GetQueryTable($Camp_PlaceQuery);
+    $Place_type_str = "Camp";
+} else {
+    $Place_Tables = GetQueryTable($BBQ_PlaceQuery);
+    $Place_type_str = "BBQ";
+}
+$upper_id = 0;
+$dict = [];
+while ($row = mysqli_fetch_row($Place_Tables)) {
+    sscanf($row[0], "$Place_type_str%d", $upper_id);
+    $dict[$upper_id] = $row[0];
+}
+$id = "";
+// 中間缺號，新增的場地填補缺號
+$createQuery = "Insert Into Place Values";
+$upper_id += $create_number;
+for ($i = 1; $create_number != 0 && $i <= $upper_id; $i++) {
+    if (!$dict[$i]) {
+        $id = sprintf("\"%s%03d\"", $Place_type_str, $i);
+        $createQuery = $createQuery . "($id, $price),";
+        $create_number--;
+    }
+}
+$createQuery[-1] = ";";
+$ret = sendQuery($createQuery);
 ?>
 <html>
 
@@ -56,7 +92,12 @@ foreach ($_POST as $key => $value) {
     <div class="centerRegion">
         <div class="text">
             <p class="reply" style="padding: 2em 0;">
-                新增成功
+                <?php
+                    if ($ret) 
+                        echo "新增成功";
+                    else
+                        echo "新增失敗"; 
+                ?>
             </p>
 
             <div class="bottom" style="text-align: center;">

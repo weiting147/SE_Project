@@ -105,11 +105,6 @@ function sendQuery($query) {
     }
     $successful = mysqli_query($db, $query);
 
-    if (!$successful) {
-        mysqli_close($db);
-        echo "Query Error";
-        exit();
-    }
     mysqli_close($db);
 
     return $successful;

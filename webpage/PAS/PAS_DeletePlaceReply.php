@@ -3,6 +3,11 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
+$placeID = $_POST["placeID"];
+$deleteQuery = <<<EOF
+    Delete From Place Where Place_ID= '$placeID';
+EOF;
+$ret = sendQuery($deleteQuery);
 ?>
 <html>
 
@@ -50,7 +55,12 @@ CheckEntry("PAS");
     <div class="centerRegion">
         <div class="text">
             <p class="reply" style="padding: 2em 0;">
-                已刪除該場地
+            <?php
+                if ($ret)
+                    echo "已刪除該場地";
+                else
+                    echo "刪除場地失敗";
+                ?>
             </p>
 
             <div class="bottom" style="text-align: center;">

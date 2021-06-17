@@ -3,6 +3,8 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
+$placeID = $_POST["placeID"];
+$price = $_POST["price"];
 ?>
 <html>
 
@@ -54,11 +56,21 @@ CheckEntry("PAS");
             <p class="reply" style="padding: 2em 0;">
                 <span>是否刪除該場地？</span>
             </p>
-            <div>
-                <input type="button" value="取消" onclick="location.href='PAS_PlaceManage.php'"
-                    style="margin: 0em 2em;cursor: pointer;">
-                <input type="button" value="確認刪除" onclick="location.href='PAS_DeletePlaceReply.php'"
-                    style="margin: 0em 2em; cursor: pointer;">
+            <div class="lst" style="margin: 1em ;color: #707070;">
+                <?php
+                echo <<<EOF
+                        <div></div><div></div>
+                        <span>$placeID</span>
+                        <span>$price</span>
+                        <div></div><div></div>
+                        </div><br/>
+                        EOF;
+                ?>
+                <form action="PAS_DeletePlaceReply.php" method="POST">
+                    <input type="hidden" name="placeID" value="<?php echo $_POST["placeID"]; ?>">
+                    <input type="button" value="取消" onclick="location.href='PAS_PlaceManage.php'" style="margin: 0em 2em;cursor: pointer;">
+                    <input type="submit" value="確認刪除" style="margin: 0em 2em; cursor: pointer;">
+                </form>
             </div>
         </div>
     </div>

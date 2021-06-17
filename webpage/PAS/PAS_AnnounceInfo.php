@@ -3,6 +3,10 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
+$title = $_POST["title"];
+$text = $_POST["text"];
+$date = $_POST["date"];
+$time = $_POST["time"];
 ?>
 <html>
     <head>
@@ -56,20 +60,20 @@ CheckEntry("PAS");
                     
                     <div class = "content">
                         <p> 標題：</p>
-                        <input type="text" style="width: 40em;" readonly="readonly"/>
+                        <input type="text" value="<?php echo $title;?>"  style="width: 40em;" readonly="readonly"/>
                     </div>
                     <div class = "content">
                         <p> 發布者：</p>
                         <input type="text" style="width: 15em;" readonly="readonly" value = "場地管理員"/>
                         <p style="margin-left: 1em;"> 發布時間：</p>
-                        <input type="text" style="width: 15em;" readonly="readonly"/>
+                        <input type="text" value="<?php echo $date." " . $time;?>"  style="width: 15em;" readonly="readonly"/>
                     </div>
                     
                     <div class = "content">
                         <p> 內文：</p>
                         <!-- <input type="text" style="width: 40em;"/> -->
 
-                        <textarea name="Content" readonly="readonly" style="width:40em;height:20em;">公告內容的啦</textarea>
+                        <textarea name="Content" readonly="readonly" style="width:40em;height:20em;"><?php echo $text;?> </textarea>
                     </div>
                 </div>   
                 <!-- 確認鍵 -->

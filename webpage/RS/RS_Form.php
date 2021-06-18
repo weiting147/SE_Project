@@ -39,6 +39,9 @@ setcookie('Email', $Email, time()+3600);
 setcookie('Phone', $Phone, time()+3600);
 setcookie('Address', $Address, time()+3600);
 setcookie('studentID', $studentID, time()+3600);
+
+$today = date('Y/m/d H:i:s');
+echo $today;
 ?>
 
 <html>

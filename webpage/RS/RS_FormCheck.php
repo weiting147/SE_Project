@@ -4,6 +4,8 @@ set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("RS");
 
+$appTime = date('Y/m/d H:i:s');
+
 $acc=$_COOKIE['acc'];
 $userName=$_COOKIE['userName'];
 $Email=$_COOKIE['Email'];
@@ -40,6 +42,47 @@ $camp3=$_POST['camp3'];
 $camp4=$_POST['camp4'];
 $camp5=$_POST['camp5'];
 $camp6=$_POST['camp6'];
+
+$ovenNum=0;
+if($thing=='valuable')
+    $ovenNum++;
+if($thing2=='valuable')
+    $ovenNum++;
+if($thing3=='valuable')
+    $ovenNum++;
+if($thing4=='valuable')
+    $ovenNum++;
+if($thing5=='valuable')
+    $ovenNum++;
+if($thing6=='valuable')
+    $ovenNum++;
+
+$campNum=0;
+if($camp=='valuable')
+    $campNum++;
+if($camp2=='valuable')
+    $campNum++;
+if($camp3=='valuable')
+    $campNum++;
+if($camp4=='valuable')
+    $campNum++;
+if($camp5=='valuable')
+    $campNum++;
+if($camp6=='valuable')
+    $campNum++;
+
+echo $ovenNum.'<br>';
+echo $campNum.'<br>';
+
+
+// sql insert application
+
+//$newApplicant = <<<EOF
+    //Insert Into Applicant_form values ('$acc','001','$peopleNum','$appTime','統編','$appUnit','TaxNumber','$ovenNum','$campNum',0,0,0);    
+//EOF;
+
+//$ret = sendQuery($newApplicant);
+
 ?>
 <html>
 

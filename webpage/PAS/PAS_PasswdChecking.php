@@ -3,13 +3,24 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
+$account = $_POST["account"];
+$newPassword = $_POST["psw"];
+$modifyQuery = <<<EOF
+    Update Account Set passwd = '$newPassword' Where AID= '$account';
+EOF;
+$ret = sendQuery($modifyQuery);
+setcookie("account", "", time() - 3600, '/');
+setcookie("identity", "", time() - 3600, '/');
 ?>
 <html>
 <script>
     function check_all(obj, cName) {
         var checkboxs = document.getElementsByName(cName);
-        for (var i = 0; i < checkboxs.length; i++) { checkboxs[i].checked = obj.checked; }
-    }</script>
+        for (var i = 0; i < checkboxs.length; i++) {
+            checkboxs[i].checked = obj.checked;
+        }
+    }
+</script>
 
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
@@ -44,7 +55,7 @@ CheckEntry("PAS");
                     </a>
                     <ul>
                         <li><a href="PAS_ModifyPasswd.php">修改密碼</a></li>
-                        <li><a href="/webpage/Login.php">登出</a></li>
+                        <li><a href="/webpage/Logout.php">登出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -55,17 +66,23 @@ CheckEntry("PAS");
     <div class="centerRegion">
         <div class="text">
             <p class="reply" style="padding-bottom: 1em;">
-                密碼已修改完成，請重新登入
+                <?php
+                if ($ret) {
+                    echo "密碼已修改完成，請重新登入";
+                } else {
+                    echo "密碼修改錯誤，請重新常識";
+                }
+                ?>
             </p>
         </div>
-    
+
         <div class="text">
             <div class="bottom" style="text-align: center;">
-                <a href="/webpage/Login.php"><button type="button" style="cursor: pointer;">確認</button></a>
+                <a href="/webpage/Logout.php"><button type="button" style="cursor: pointer;">確認</button></a>
             </div>
         </div>
     </div>
-    
+
 
     <!-- 網頁下方的工具列或訊息 -->
     <footer style="margin: 0%;">

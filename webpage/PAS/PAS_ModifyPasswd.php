@@ -9,14 +9,23 @@ CheckEntry("PAS");
     function check_all(obj, cName) {
         var checkboxs = document.getElementsByName(cName);
         for (var i = 0; i < checkboxs.length; i++) { checkboxs[i].checked = obj.checked; }
-    }</script>
+    }
+    function PasswdChecking(form) {
+        if (!form.psw.value || (form.psw.value != form.pswCheck.value)) {
+            alert("未輸入密碼或密碼輸入錯誤！");
+            return false;
+        }
+        else
+            return true;
+    }
+</script>
 
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/Account.css" type="text/css" />
 
     <meta charset="utf-8">
-    <title>PAS_Reject</title>
+    <title>PAS_ModifyPasswd</title>
 </head>
 
 <body style=margin:0px>
@@ -44,7 +53,7 @@ CheckEntry("PAS");
                     </a>
                     <ul>
                         <li><a href="PAS_ModifyPasswd.php">修改密碼</a></li>
-                        <li><a href="/webpage/Login.php">登出</a></li>
+                        <li><a href="/webpage/Logout.php">登出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -57,13 +66,14 @@ CheckEntry("PAS");
             <p class="title">
                 密碼修改
             </p>
+            <form action="PAS_PasswdChecking.php" method="POST" onsubmit="return PasswdChecking(this);">
             <div class="content">
                 <div class="formTextR">
                     <p>帳號：</p>
                 </div>
                 <div class="formBlock">
                     <!-- 帳號不能修改，為readonly，value的部分要填該行政人員的帳號 -->
-                    <input type="text" name="account" style="width: 200px" readonly="readonly" value="行政人員的帳號">
+                    <input type="text" name="account" style="width: 200px" readonly="readonly" value="<?php echo $_COOKIE["account"]?>">
                 </div>
                 <div class="formTextL">
                     <p>密碼：</p>
@@ -89,9 +99,10 @@ CheckEntry("PAS");
             <div class="bottom" style="text-align: center;">
                 <a href="PAS_FormManage.php"><button type="button"
                         style="cursor: pointer; margin: 4em 2em 0 0;">取消修改</button></a>
-                <a href="PAS_PasswdChecking.php"><button type="button"
-                        style="cursor: pointer; margin: 4em 0 0 2em;">確認修改</button></a>
+                <input type="submit"
+                        style="cursor: pointer; margin: 4em 0 0 2em;" value="確認修改">
             </div>
+            </form>
         </div>
     </div>
 

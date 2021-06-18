@@ -1,4 +1,46 @@
 <!doctype html>
+
+<?php
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("RS");
+
+$acc=$_COOKIE['acc'];
+//申請人
+$userName=$_COOKIE['userName'];
+//學號
+$InSchoolTable = <<<EOF
+    Select * From In_school_user;    
+EOF;
+$studentTable = GetQueryTable($InSchoolTable);
+while($row = mysqli_fetch_row($studentTable)) {
+    if ($row[0]==$acc){
+        $studentID=$acc;
+    }
+    else
+        $studentID="非學生";
+}
+
+//聯絡單位 電子信箱 地址
+$userNameTable = <<<EOF
+    Select * From Normal_user;    
+EOF;
+$userTable = GetQueryTable($userNameTable);
+
+while($row = mysqli_fetch_row($userTable)) {
+    if ($row[0]==$acc){
+        $Email=$row[2];
+        $Phone=$row[3];
+        $Address=$row[4];
+    }
+}
+
+setcookie('Email', $Email, time()+3600);
+setcookie('Phone', $Phone, time()+3600);
+setcookie('Address', $Address, time()+3600);
+setcookie('studentID', $studentID, time()+3600);
+?>
+
 <html>
 
 <head>
@@ -47,12 +89,14 @@
                     露營烤肉區租借申請單
                 </p>
                 <!-- 申請單內容 -->
-
+                <form method="post" action="RS_FormCheck.php">
                 <div class="content">
                     <p> 申請人：</p>
-                    <input type="text" style="width: 18em;" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$userName\" style=\"width: 18em;\" />";
+                    ?>
                     <p>申請單位：</p>
-                    <input type="text" style="width: 18em;" />
+                    <input type="text" style="width: 18em;" name='appUnit'/>
                 </div>
                 <div class="content">
                     <div style="display: flex; align-items: flex-end;">
@@ -60,48 +104,56 @@
                         <p style="font-size: 0.7em;">(校內學生借用)</p>
                         <p>：</p>
                     </div>
-                    <input type="text" style="width: 18em;" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$studentID\" style=\"width: 18em;\" />";
+                    ?>
                     <p>聯絡單位：</p>
-                    <input type="text" style="width: 18em;" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$Phone\" style=\"width: 18em;\" />";
+                    ?>
                 </div>
                 <div class="content">
                     <p>電子信箱：</p>
-                    <input type="text" style="width: 28em;" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$Email\" style=\"width: 28em;\" />";
+                    ?>
                     <p>使用總人數：</p>
-                    <input type="text" style="width: 8em;" />
+                    <input type="text" style="width: 8em;" name="peopleNum"/>
                 </div>
                 <div class="content" style="margin-bottom: 5px;">
                     <p style="width: 12em;">收據繳款(人)(公司名稱)：</p>
-                    <input type="text" style="width: 50em;" />
+                    <input type="text" style="width: 50em;" name="receiptPayer"/>
                 </div>
                 <div style="margin: 0px 150px;">
                     <p style="text-align: left; width: 30em; font-size: 0.7em;">(如為公司請詳填全名，開立收據後不可更改收據抬頭)</p>
                 </div>
                 <div class="content">
                     <p> 地址：</p>
-                    <input type="text" style="width: 52em;" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$Address\" style=\"width: 52em;\" />";
+                    ?>
                 </div>
                 <div style="margin: 25px 150px; text-align: left;">
                     <span style="font-weight: bold;"> 是否租借烤肉區？</span> &nbsp;&nbsp;
                     <!--空格-->
                     <label for="r1">是</label>
-                    <input type="radio" id="r1" name="rr" /> &nbsp;&nbsp;
+                    <input type="radio" id="r1" name="or" value=1/> &nbsp;&nbsp;
                     <label for="r2">否</label>
-                    <input type="radio" id="r2" name="rr" />
+                    <input type="radio" id="r2" name="or" value=0/>
                 </div>
                 <div class="content">
                     <div class="contentflex" style="width: 28.8em;">
                         <p>租借日期：</p>
-                        <input type="text" placeholder="2000" style="width: 7em;" />
+                        <input type="text" placeholder="2000" style="width: 7em;" name="oRentY"/>
                         <p>年</p>
-                        <input type="text" placeholder="01" style="width: 7em;" />
+                        <input type="text" placeholder="01" style="width: 7em;" name="oRentM"/>
                         <p>月</p>
-                        <input type="text" placeholder="01" style="width: 7em;" />
+                        <input type="text" placeholder="01" style="width: 7em;" name="oRentD"/>
                         <p>日</p>
                     </div>
                     <div class="contentflex" style="width: 20em;">
                         <p>時段：</p>
-                        <select id="timeschooser" style="width: 18em;">
+                        <select id="timeschooser" style="width: 18em;" name="oRentT">
                             <option>09:00 ~ 12:00</option>
                             <option>12:00 ~ 15:00</option>
                             <option>15:00 ~ 18:00</option>
@@ -118,7 +170,7 @@
                     <span style="width: 1.8em;"></span>
                     <!--排版用的-->
                     <div>
-                        <input type="text" style="width: 5em;" />
+                        <input type="text" style="width: 5em;" name="oNum"/>
                         <span>個</span>
                     </div>
                 </div>
@@ -126,25 +178,25 @@
                     <span style="font-weight: bold;"> 是否租借露營區？</span> &nbsp;&nbsp;
                     <!--空格-->
                     <label for="r3">是</label>
-                    <input type="radio" id="r3" name="rrr" /> &nbsp;&nbsp;
+                    <input type="radio" id="r3" name="cr" /> &nbsp;&nbsp;
                     <label for="r4">否</label>
-                    <input type="radio" id="r4" name="rrr" />
+                    <input type="radio" id="r4" name="cr" />
                 </div>
                 <div class="content">
                     <div class="contentflex" style="width: 55em;">
                         <p>租借日期：</p>
-                        <input type="text" placeholder="2000" style="width: 7em;" />
+                        <input type="text" placeholder="2000" style="width: 7em;" name="cRentY"/>
                         <p>年</p>
-                        <input type="text" placeholder="01" style="width: 7em;" />
+                        <input type="text" placeholder="01" style="width: 7em;" name="cRentM"/>
                         <p>月</p>
-                        <input type="text" placeholder="01" style="width: 7em;" />
+                        <input type="text" placeholder="01" style="width: 7em;" name="cRentD"/>
                         <p>日</p>
                         <p>~</p>
-                        <input type="text" placeholder="2000" style="width: 7em;" />
+                        <input type="text" placeholder="2000" style="width: 7em;" name="cReturnY"/>
                         <p>年</p>
-                        <input type="text" placeholder="01" style="width: 7em;" />
+                        <input type="text" placeholder="01" style="width: 7em;" name="cReturnM"/>
                         <p>月</p>
-                        <input type="text" placeholder="01" style="width: 7em;" />
+                        <input type="text" placeholder="01" style="width: 7em;" name="cReturnD"/>
                         <p>日</p>
                     </div>
                 </div>
@@ -156,7 +208,7 @@
                     </div>
                     &nbsp;&nbsp;
                     <div>
-                        <input type="text" style="width: 5em;" />
+                        <input type="text" style="width: 5em;" name="cNum"/>
                         <span>個</span>
                     </div>
                 </div>
@@ -288,7 +340,8 @@
             </div>
             <!-- 確認鍵 -->
             <div>
-                <a href="RS_FormCheck.html"><button type="button" style="cursor: pointer; margin-top: 2em;">確認訂單</button></a>
+                <button type="submit" style="cursor: pointer; margin-top: 2em;">確認訂單</button></a>
+                </form>
             </div>
         </div>
     </div>

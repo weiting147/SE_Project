@@ -1,4 +1,46 @@
 <!doctype html>
+<?php
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("RS");
+
+$acc=$_COOKIE['acc'];
+$userName=$_COOKIE['userName'];
+$Email=$_COOKIE['Email'];
+$Phone=$_COOKIE['Phone'];
+$Address=$_COOKIE['Address'];
+$studentID=$_COOKIE['studentID'];
+
+$appUnit=$_POST['appUnit'];
+$peopleNum=$_POST['peopleNum'];
+$receiptPayer=$_POST['receiptPayer'];
+$or=$_POST['or'];
+$oRentY=$_POST['oRentY'];
+$oRentM=$_POST['oRentM'];
+$oRentD=$_POST['oRentD'];
+$oRentT=$_POST['oRentT'];
+$oNum=$_POST['oNum'];
+$cr=$_POST['cr'];
+$cRentY=$_POST['cRentY'];
+$cRentM=$_POST['cRentM'];
+$cRentD=$_POST['cRentD'];
+$cReturnY=$_POST['cReturnY'];
+$cReturnM=$_POST['cReturnM'];
+$cReturnD=$_POST['cReturnD'];
+$cNum=$_POST['cNum'];
+$thing=$_POST['thing'];
+$thing2=$_POST['thing2'];
+$thing3=$_POST['thing3'];
+$thing4=$_POST['thing4'];
+$thing5=$_POST['thing5'];
+$thing6=$_POST['thing6'];
+$camp=$_POST['camp'];
+$camp2=$_POST['camp2'];
+$camp3=$_POST['camp3'];
+$camp4=$_POST['camp4'];
+$camp5=$_POST['camp5'];
+$camp6=$_POST['camp6'];
+?>
 <html>
 
 <head>
@@ -59,9 +101,13 @@
                 <!-- 訂單資訊 -->
                 <div class="content">
                     <p> 申請人：</p>
-                    <input type="text" style="width: 18em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$userName\" style=\"width: 18em;\" />";
+                    ?>
                     <p>申請單位：</p>
-                    <input type="text" style="width: 18em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" style=\"width: 18em;\" readonly=\"readonly\" value=\"$appUnit\" />";
+                    ?>
                 </div>
                 <div class="content">
                     <div style="display: flex; align-items: flex-end;">
@@ -69,48 +115,82 @@
                         <p style="font-size: 0.7em;">(校內學生借用)</p>
                         <p>：</p>
                     </div>
-                    <input type="text" style="width: 18em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$studentID\" style=\"width: 18em;\" />";
+                    ?>
                     <p>聯絡單位：</p>
-                    <input type="text" style="width: 18em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$Phone\" style=\"width: 18em;\" />";
+                    ?>
                 </div>
                 <div class="content">
                     <p>電子信箱：</p>
-                    <input type="text" style="width: 28em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$Email\" style=\"width: 28em;\" />";
+                    ?>
                     <p>使用總人數：</p>
-                    <input type="text" style="width: 8em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" style=\"width: 8em;\" readonly=\"readonly\" value=\"$peopleNum\" />";
+                    ?>
                 </div>
                 <div class="content" style="margin-bottom: 5px;">
                     <p style="width: 12em;">收據繳款(人)(公司名稱)：</p>
-                    <input type="text" style="width: 50em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" style=\"width: 50em;\" readonly=\"readonly\" value=\"$receiptPayer\" />";
+                    ?>
                 </div>
                 <div style="margin: 0px 150px;">
                     <p style="text-align: left; width: 30em; font-size: 0.7em;">(如為公司請詳填全名，開立收據後不可更改收據抬頭)</p>
                 </div>
                 <div class="content">
                     <p> 地址：</p>
-                    <input type="text" style="width: 52em;" readonly="readonly" />
+                    <?php
+                    echo "<input type=\"text\" readonly=\"readonly\" value=\"$Address\" style=\"width: 52em;\" />";
+                    ?>
                 </div>
                 <div style="margin: 25px 150px; text-align: left;">
                     <span style="font-weight: bold;"> 是否租借烤肉區？</span> &nbsp;&nbsp;
                     <!--空格-->
-                    <label for="r1">是</label>
-                    <input type="radio" id="r1" name="rr" readonly="readonly" /> &nbsp;&nbsp;
-                    <label for="r2">否</label>
-                    <input type="radio" id="r2" name="rr" readonly="readonly" />
+                    <?php
+                    if($or==1){
+                    ?>
+                        <label for="r1">是</label>
+                        <input type="radio" id="r1" name="or" readonly="readonly" checked="true"/> &nbsp;&nbsp;
+                        <label for="r2">否</label>
+                        <input type="radio" id="r2" name="or" readonly="readonly" />
+                    <?php
+                    }
+                    else{
+                    ?>
+                        <label for="r1">是</label>
+                        <input type="radio" id="r1" name="or" readonly="readonly" /> &nbsp;&nbsp;
+                        <label for="r2">否</label>
+                        <input type="radio" id="r2" name="or" readonly="readonly" checked="true"/>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <div class="content">
                     <div class="contentflex" style="width: 28.8em;">
                         <p>租借日期：</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$oRentY\" />";
+                        ?>
                         <p>年</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$oRentM\" />";
+                        ?>
                         <p>月</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$oRentD\" />";
+                        ?>
                         <p>日</p>
                     </div>
                     <div class="contentflex" style="width: 20em;">
                         <p>時段：</p>
-                        <input type="text" style="width: 18em;" readonly="readonly">
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 18em;\" readonly=\"readonly\" value=\"$oRentT\" />";
+                        ?>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; margin: 25px 150px;">
@@ -122,33 +202,61 @@
                     <span style="width: 1.8em;"></span>
                     <!--排版用的-->
                     <div>
-                        <input type="text" style="width: 5em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 5em;\" readonly=\"readonly\" value=\"$oNum\"/>";
+                        ?>
                         <span>個</span>
                     </div>
                 </div>
                 <div style="margin: 25px 150px; text-align: left;">
                     <span style="font-weight: bold;"> 是否租借露營區？</span> &nbsp;&nbsp;
                     <!--空格-->
-                    <label for="r3">是</label>
-                    <input type="radio" id="r3" name="rrr" readonly="readonly" /> &nbsp;&nbsp;
-                    <label for="r4">否</label>
-                    <input type="radio" id="r4" name="rrr" readonly="readonly" />
+                    <?php
+                    if($or==1){
+                    ?>
+                        <label for="r3">是</label>
+                        <input type="radio" id="r3" name="cr" readonly="readonly" checked="true"/> &nbsp;&nbsp;
+                        <label for="r4">否</label>
+                        <input type="radio" id="r4" name="cr" readonly="readonly" />
+                    <?php
+                    }
+                    else{
+                    ?>
+                        <label for="r3">是</label>
+                        <input type="radio" id="r3" name="cr" readonly="readonly" /> &nbsp;&nbsp;
+                        <label for="r4">否</label>
+                        <input type="radio" id="r4" name="cr" readonly="readonly" checked="true"/>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <div class="content">
                     <div class="contentflex" style="width: 55em;">
                         <p>租借日期：</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$cRentY\" />";
+                        ?>
                         <p>年</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$cRentM\" />";
+                        ?>
                         <p>月</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$cRentD\" />";
+                        ?>
                         <p>日</p>
                         <p>~</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$cReturnY\" />";
+                        ?>
                         <p>年</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$cReturnM\" />";
+                        ?>
                         <p>月</p>
-                        <input type="text" style="width: 7em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 7em;\" readonly=\"readonly\" value=\"$cReturnD\" />";
+                        ?>
                         <p>日</p>
                     </div>
                 </div>
@@ -160,7 +268,9 @@
                     </div>
                     &nbsp;&nbsp;
                     <div>
-                        <input type="text" style="width: 5em;" readonly="readonly" />
+                        <?php
+                        echo "<input type=\"text\" style=\"width: 5em;\" readonly=\"readonly\" value=\"$cNum\"/>";
+                        ?>
                         <span>個</span>
                     </div>
                 </div>
@@ -262,7 +372,7 @@
             </div>
             <!-- 確認鍵 -->
             <div>
-                <a href="RS_Record.html"><button type="button" style="cursor: pointer;">確認</button></a>
+                <a href="RS_Record.php"><button type="button" style="cursor: pointer;">確認</button></a>
             </div>
         </div>
     </div>

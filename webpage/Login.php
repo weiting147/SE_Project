@@ -105,7 +105,7 @@ if ($_COOKIE["account"]) {
 
         </div>
         <div class="login">
-            <form action="Login.php" method="POST">
+            <form action="login.php" method="POST">
                 <div>帳號：</div>
                 <div><input type="text" name="account" style="width: 70%;" value="<?php
                                                                                     if ($_POST && $isUser == false)

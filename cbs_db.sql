@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS `Application_Form`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Application_Form` (
-  `AID` varchar(16) DEFAULT NULL,
+  `AID` varchar(16) NOT NULL,
   `ApplicationID` varchar(16) NOT NULL,
   `PeopleNumber` int NOT NULL,
   `ApplicationTime` timestamp NOT NULL,
@@ -82,9 +82,9 @@ CREATE TABLE `Application_Form` (
   `TaxNumber` varchar(16) DEFAULT NULL,
   `OvenNumber` int NOT NULL,
   `CampNumber` int NOT NULL,
-  `RefundState` varchar(8) NOT NULL,
-  `CheckState` varchar(8) NOT NULL,
-  `PayState` varchar(8) NOT NULL,
+  `RefundState` int NOT NULL,
+  `CheckState` int NOT NULL,
+  `PayState` int NOT NULL,
   PRIMARY KEY (`ApplicationID`),
   KEY `AID` (`AID`),
   CONSTRAINT `Application_Form_ibfk_1` FOREIGN KEY (`AID`) REFERENCES `Normal_User` (`AID`)
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-18 11:28:24
+-- Dump completed on 2021-06-18 16:19:09

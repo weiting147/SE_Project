@@ -61,7 +61,7 @@ CREATE TABLE `Announcement` (
 
 LOCK TABLES `Announcement` WRITE;
 /*!40000 ALTER TABLE `Announcement` DISABLE KEYS */;
-INSERT INTO `Announcement` VALUES (1,'place1','2021-06-17 12:53:01','公告系統上線','公告系統上線');
+INSERT INTO `Announcement` VALUES (1,'place1','2019-06-01 00:00:00','公告系統上線','公告系統上線'),(1,'place2','2019-07-01 01:00:00','暑假租借通知','暑假期間，高大場地不提供租借'),(1,'place3','2019-09-17 01:00:00','開放租借通知','新學期已開始，開放場地租借'),(1,'place4','2020-04-05 00:00:00','租借系統維修通知','近期租借系統異常，將於 04/07 上午8時關閉系統並維修'),(1,'place5','2020-04-07 09:15:32','租借系統開放通知','系統已維修完畢，已開放系統'),(1,'place6','2021-06-18 02:58:55','2021 暑假租借通知','適逢疫情期間，高大場地暫停租借使用');
 /*!40000 ALTER TABLE `Announcement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-17 21:37:53
+-- Dump completed on 2021-06-18 11:28:24

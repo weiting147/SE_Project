@@ -17,18 +17,6 @@ if ($_POST["m"]) {
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/Announcement.css" type="text/css" />
-    <style>
-        input {
-            caret-color: auto;
-            /* 預設 */
-            caret-color: transparent;
-            /* 透明 */
-            caret-color: #FF1744;
-            /* 指定色 */
-            outline: none;
-            /* 外框效果 */
-        }
-    </style>
     <script type="text/javascript">
         function submitForm(formName) {
             document.getElementById(formName).submit();

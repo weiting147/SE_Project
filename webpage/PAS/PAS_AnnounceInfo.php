@@ -78,7 +78,7 @@ $time = $_POST["time"];
                 </div>   
                 <!-- 確認鍵 -->
                 <div>
-                    <a href = "PAS_AnnouncementManage.php"><button type="button" style="cursor: pointer; margin-top: 2em;">確認</button></a>
+                    <button type="button" onclick="javascript:history.back();" style="cursor: pointer; margin-top: 2em;">確認</button>
                 </div>
             </div>
         </div>

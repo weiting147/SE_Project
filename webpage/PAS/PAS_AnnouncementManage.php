@@ -3,10 +3,14 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("PAS");
-$announceQuery = <<<EOF
-    Select * From Announcement Where identity = 1;    
-EOF;
-$announceTable = GetQueryTable($announceQuery);
+$year = strval(date("Y"));
+$month = "%";
+if ($_POST["y"]) {
+    $year = strval($_POST["y"]);
+}
+if ($_POST["m"]) {
+    $month = sprintf("%02s", strval($_POST["m"]));
+}
 ?>
 <html>
 
@@ -27,7 +31,7 @@ $announceTable = GetQueryTable($announceQuery);
     </style>
     <script type="text/javascript">
         function submitForm(formName) {
-            document.getElementById(formName).submit(); 
+            document.getElementById(formName).submit();
         }
     </script>
     <meta charset="utf-8">
@@ -48,7 +52,7 @@ $announceTable = GetQueryTable($announceQuery);
         <div class="grayBlock menu">
             <ul>
                 <li><a href="PAS_FormManage.php">申請批准</a></li>
-                <li><a href=" href= PAS_Record.php">租借紀錄</a></li>
+                <li><a href="PAS_Record.php">租借紀錄</a></li>
                 <li><a href="PAS_PlaceManage.php">場地管理</a></li>
                 <li class="grayLi"><a href="PAS_AnnouncementManage.php">公告</a></li>
             </ul>
@@ -73,6 +77,34 @@ $announceTable = GetQueryTable($announceQuery);
             <p class="title">
                 <span>公告</span>
             </p>
+            <br />
+            <p>
+            <form action="PAS_AnnouncementManage.php" method="POST">
+                <select name="y">
+                    <option value="%">所有年份 </option>
+                    <?php
+                    for ($i = intval(date("Y")); $i >= 2019; $i--) {
+                        if ($year != strval($i))
+                            echo "<option value='$i'>$i 年</option>";
+                        else
+                            echo "<option selected='selected' value='$i'>$i 年</option>";
+                    }
+                    ?>
+                </select>
+                <select name="m">
+                    <option value="%">所有月份 </option>
+                    <?php
+                    for ($i = 12; $i >= 1; $i--) {
+                        if ($month != strval($i))
+                            echo "<option value='$i'>$i 月</option>";
+                        else
+                            echo "<option selected='selected' value='$i'>$i 月</option>";
+                    }
+                    ?>
+                </select>
+                <input type="submit" value="查詢" />
+            </form>
+            </p>
             <div class="right" style="margin: 1em 0em">
                 <input type="button" value="發布新公告" onclick="location.href='PAS_CreateAnnoucement.php'" style="cursor: pointer;">
             </div>
@@ -85,6 +117,10 @@ $announceTable = GetQueryTable($announceQuery);
             </div>
 
             <?php
+            $announceQuery = sprintf(<<<EOF
+            Select * From Announcement Where identity = 1 and ReleaseTime Like '%s-%s-%%' Order By ReleaseTime desc;
+            EOF, $year, $month);
+            $announceTable = GetQueryTable($announceQuery);
             while ($row = mysqli_fetch_row($announceTable)) {
                 $title = $row[3];
                 $text = $row[4];

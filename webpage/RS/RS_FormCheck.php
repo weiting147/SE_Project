@@ -4,7 +4,7 @@ set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("RS");
 
-$appTime = date('Y/m/d H:i:s');
+$appTime = date('Y/m/d H:i:s',strtotime('+8 hour'));
 $day = date('Y/m/d',strtotime('+7 day'));
 
 $acc=$_COOKIE['acc'];
@@ -36,80 +36,70 @@ $cReturnY=$_POST['cReturnY'];
 $cReturnM=$_POST['cReturnM'];
 $cReturnD=$_POST['cReturnD'];
 $cNum=$_POST['cNum'];
-$th=0;
+$th=array(0,0,0,0,0,0);
 $thing=$_POST['thing'];
-$th2=0;
 $thing2=$_POST['thing2'];
-$th3=0;
 $thing3=$_POST['thing3'];
-$th4=0;
 $thing4=$_POST['thing4'];
-$th5=0;
 $thing5=$_POST['thing5'];
-$th6=0;
 $thing6=$_POST['thing6'];
-$ca=0;
+$ca=array(0,0,0,0,0,0);
 $camp=$_POST['camp'];
-$ca2=0;
 $camp2=$_POST['camp2'];
-$ca3=0;
 $camp3=$_POST['camp3'];
-$ca4=0;
 $camp4=$_POST['camp4'];
-$ca5=0;
 $camp5=$_POST['camp5'];
-$ca6=0;
 $camp6=$_POST['camp6'];
 
 $ovenNum=0;
 if($thing=='valuable'){
-    $th=1;
+    $th[0]=1;
     $ovenNum++;
 }
 if($thing2=='valuable'){
-    $th2=1;
+    $th[1]=1;
     $ovenNum++;
 }
 if($thing3=='valuable'){
-    $th3=1;
+    $th[2]=1;
     $ovenNum++;
 }
 if($thing4=='valuable'){
-    $th4=1;
+    $th[3]=1;
     $ovenNum++;
 }
 if($thing5=='valuable'){
-    $th5=1;
+    $th[4]=1;
     $ovenNum++;
 }
 if($thing6=='valuable'){
-    $th6=1;
+    $th[5]=1;
     $ovenNum++;
 }
 
 $campNum=0;
 if($camp=='valuable'){
-    $ca=1;
+    $ca[0]=1;
     $campNum++;
 }
 if($camp2=='valuable'){
-    $ca2=1;
+    $ca[1]=1;
     $campNum++;
 }
 if($camp3=='valuable'){
-    $ca3=1;
+    $ca[2]=1;
     $campNum++;
 }
 if($camp4=='valuable'){
-    $ca4=1;
+    $ca[3]=1;
     $campNum++;
 }
 if($camp5=='valuable'){
-    $ca5=1;
+    $ca[4]=1;
     $campNum++;
 }
 if($camp6=='valuable'){
-    $ca6=1;
+    $ca[5]=1;
     $campNum++;
 }
 
@@ -139,6 +129,8 @@ if($or==1){
     }
     else{
         $oRent=$oRentY.'/'.$oRentM.'/'.$oRentD;
+        $oReturnD=$oRentD+1;
+        $oReturn=$oRentY.'/'.$oRentM.'/'.$oReturnD;
     }
 }
 else{
@@ -204,18 +196,39 @@ $refundState=0;
 $checkState=0;
 $payState=0;
 
-
 if($errorflag==0){
     // sql insert application
     $newApplicant = <<<EOF
         Insert Into Application_form values ('$acc','$AppID','$peopleNum','$appTime','$uniformNum','$appUnit','$taxNum','$ovenNum','$campNum','$refundState','$checkState','$payState');    
     EOF;
-
     sendQuery($newApplicant);
+    
     //rent detail insert
+    if($oNum>0){
+        for($i=0;$i<$oNum;$i++){
+            if($th[$i]==1){
+                $thi=$i+1;
+                $newApplicant = <<<EOF
+                    Insert Into Rent_detail values ('$AppID','$thi','$oRent','$oReturn');    
+                EOF;
+                sendQuery($newApplicant);
+            }
+        }
+    }
+    if($cNum>0){
+        for($i=0;$i<$cNum;$i++){
+            if($ca[$i]==1){
+                $cai=$i+1;
+                $newApplicant = <<<EOF
+                    Insert Into Rent_detail values ('$AppID','$cai','$cRent','$cReturn');    
+                EOF;
+                sendQuery($newApplicant);
+            }
+        }
+    }
 }
 else{
-    echo $errorflag;
+    //echo $errorflag;
 }
 
 ?>

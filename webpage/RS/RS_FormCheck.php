@@ -179,10 +179,7 @@ if($cr==1){
         $errorflag=13;
     }
 }
-//--------------------------------------
-
-
-
+//資料筆數
 $AppID = 0;
 $AppTable = <<<EOF
     Select * From Application_Form;    
@@ -191,12 +188,102 @@ $AppTable = GetQueryTable($AppTable);
 $AppID=mysqli_num_rows($AppTable);
 $AppID++;
 
+//oven rent time處理
+$startT=explode(':',$oRentT);
+$oRent=$oRent.' '.$startT[0].":00:00";
+$endT=explode(' ',$startT[1]);
+$oReturn=$oReturn.' '.$endT[2].":00:00";
+//位子是否重複
+if($AppID!=1){
+    //BBQ
+    $timeflag=0;
+    $PlaceTable = <<<EOF
+        Select Application_Form.ApplicationID,Application_Form.CheckState,Rent_Detail.Place_ID,Rent_Detail.StartDate,Rent_Detail.EndDate 
+        From Application_Form 
+        Inner Join Rent_Detail 
+        on Application_Form.ApplicationID=Rent_Detail.ApplicationID 
+        where Rent_Detail.Place_ID Like 'BBQ%';    
+    EOF;
+    $PlaceTable = GetQueryTable($PlaceTable);
+    while($row = mysqli_fetch_row($PlaceTable)) {
+        //echo $row[0].'|';//ApplicationID
+        //echo $row[1].'|';//CheckState
+        //echo $row[2].'|';//Place_ID
+        //echo $row[3].'|';//StartDate
+        //echo $row[4].'<br>';//EndDate
+        $bbqID=explode("BBQ00",$row[2]);
+        $bbqID2=intval($bbqID[1]);
+        $bbqID2=$bbqID2-1;
+        if($row[1]!=2){
+            for($i=0;$i<6;$i++){
+                if($th[$i]!=0 && $i == $bbqID2){
+                    //echo "<br>=============<br>";
+                    //echo $oRent.'>'.$row[4];
+                    //echo "~";
+                    //echo $oReturn.'>'.$row[4];
+                    //echo '<br>';
+                    if(strtotime($oRent)<strtotime($row[3]) && strtotime($oReturn)<strtotime($row[3]))
+                        $timeflag=0;
+                    else if(strtotime($oRent)>strtotime($row[4]) && strtotime($oReturn)<strtotime($row[4]))
+                        $timeflag=0;
+                    else{
+                        $timeflag=1;
+                        break;
+                    }
+                }
+            }
+            if($timeflag==1)
+                break;
+        }
+    }
+    //camp
+    $timeflag2=0;
+    $PlaceTable = <<<EOF
+        Select Application_Form.ApplicationID,Application_Form.CheckState,Rent_Detail.Place_ID,Rent_Detail.StartDate,Rent_Detail.EndDate 
+        From Application_Form 
+        Inner Join Rent_Detail 
+        on Application_Form.ApplicationID=Rent_Detail.ApplicationID 
+        where Rent_Detail.Place_ID Like 'Camp%';    
+    EOF;
+    $PlaceTable = GetQueryTable($PlaceTable);
+    while($row = mysqli_fetch_row($PlaceTable)) {
+        //echo $row[0].'|';//ApplicationID
+        //echo $row[1].'|';//CheckState
+        //echo $row[2].'|';//Place_ID
+        //echo $row[3].'|';//StartDate
+        //echo $row[4].'<br>';//EndDate
+        $campID=explode("Camp00",$row[2]);
+        $campID2=intval($campID[1]);
+        $campID2=$campID2-1;
+        if($row[1]!=2){
+            for($i=0;$i<6;$i++){
+                if($ca[$i]!=0 && $i == $campID2){
+                    if(strtotime($cRent)<strtotime($row[3]) && strtotime($cReturn)<strtotime($row[3]))
+                        $timeflag2=0;
+                    else if(strtotime($cRent)>strtotime($row[4]) && strtotime($cReturn)<strtotime($row[4]))
+                        $timeflag2=0;
+                    else{
+                        $timeflag2=1;
+                        break;
+                    }
+                }
+            }
+            if($timeflag2==1)
+                break;
+        }
+    }
+}
+//--------------------------------------
+
+
 $refundState=0;
 $checkState=0;
 $payState=0;
 
 
-if($errorflag==0){
+if($errorflag==0 && $timeflag!=1 && $timeflag2!=1 ){
+    //======================================
+
     // sql insert application
     $newApplicant = <<<EOF
         Insert Into Application_Form values ('$acc','$AppID','$peopleNum','$appTime','$uniformNum','$appUnit','$taxNum','$ovenNum','$campNum','$refundState','$checkState','$payState');    
@@ -205,10 +292,6 @@ if($errorflag==0){
     
     //rent detail insert
     if($oNum>0){
-        $startT=explode(':',$oRentT);
-        $oRent=$oRent.' '.$startT[0].":00:00";
-        $endT=explode(' ',$startT[1]);
-        $oReturn=$oReturn.' '.$endT[2].":00:00";
         for($i=0;$i<6;$i++){
             if($th[$i]==1){
                 $thi=$i+1;
@@ -237,6 +320,8 @@ if($errorflag==0){
 }
 else{
     //echo $errorflag;
+    //echo $timeflag;
+    //echo $timeflag2;
     $url="RS_Form.php";
     echo "<script>alert('欄位有誤')</script>";
     echo "<script>window.location.href = '$url'</script>";

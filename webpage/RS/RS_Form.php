@@ -211,7 +211,7 @@ setcookie('studentID', $studentID, time()+3600);
                 </div>
                 <div style="display: flex; align-items: center; margin: 25px 150px;">
                     <div style="display: flex; width: auto; align-items: flex-end;">
-                        <p>租借烤爐數量</p>
+                        <p>租借營位數量</p>
                         <p style="font-size: 0.7em;">(提供水電、洗手間、夜間照明及沐浴熱水)</p>
                         <p>：</p>
                     </div>

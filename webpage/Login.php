@@ -87,6 +87,7 @@ if ($_COOKIE["account"]) {
                     <div>$date</div>
                 </div>
                 <input type="hidden" name="title" value="$title" readonly="readonly"/>
+                <input type="hidden" name="author" value="$author" readonly="readonly"/>
                 <input type="hidden" name="text" value="$text" readonly="readonly"/>
                 <input type="hidden" name="date" value="$date" readonly="readonly"/>
                 <input type="hidden" name="time" value="$time" readonly="readonly"/>

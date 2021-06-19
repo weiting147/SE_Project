@@ -1,10 +1,13 @@
 <!doctype html>
 <html>
 <?php
+if (!$_POST)
+    header("Location:/index.php");
 $title = $_POST["title"];
 $text = $_POST["text"];
 $date = $_POST["date"];
 $time = $_POST["time"];
+$author = $_POST["author"];
 ?>
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
@@ -49,7 +52,7 @@ $time = $_POST["time"];
                     </div>
                     <div class = "content">
                         <p> 發布者：</p>
-                        <input type="text" style="width: 15em;" readonly="readonly" value = "場地管理員"/>
+                        <input type="text" style="width: 15em;" readonly="readonly" value = "<?php echo $author;?>"/>
                         <p style="margin-left: 1em;"> 發布時間：</p>
                         <input type="text" value="<?php echo $date." " . $time;?>"  style="width: 15em;" readonly="readonly"/>
                     </div>

@@ -10,7 +10,7 @@ $acc=$_COOKIE['acc'];
 $userName=$_COOKIE['userName'];
 //學號
 $InSchoolTable = <<<EOF
-    Select * From In_school_user;    
+    Select * From In_School_User;    
 EOF;
 $studentTable = GetQueryTable($InSchoolTable);
 while($row = mysqli_fetch_row($studentTable)) {
@@ -23,7 +23,7 @@ while($row = mysqli_fetch_row($studentTable)) {
 
 //聯絡單位 電子信箱 地址
 $userNameTable = <<<EOF
-    Select * From Normal_user;    
+    Select * From Normal_User;    
 EOF;
 $userTable = GetQueryTable($userNameTable);
 
@@ -77,7 +77,7 @@ setcookie('studentID', $studentID, time()+3600);
                         </a>
                     <ul>
                         <li><a href="RS_AccountInfo.html">管理帳戶</a></li>
-                        <li><a href="/webpage/Login.php">登出</a></li>
+                        <li><a href="/webpage/Logout.php">登出</a></li>
                     </ul>
                 </li>
             </ul>

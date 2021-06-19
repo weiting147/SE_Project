@@ -13,7 +13,7 @@ $acc="A1075543";
 
 //-------------------hi,使用者------------------
 $userNameTable = <<<EOF
-    Select * From Normal_user;    
+    Select * From Normal_User;    
 EOF;
 $userTable = GetQueryTable($userNameTable);
 
@@ -61,7 +61,7 @@ setcookie('userName', $userName, time()+3600);
                     </a>
                     <ul>
                         <li><a href="RS_AccountInfo.html">管理帳戶</a></li>
-                        <li><a href="/webpage/Login.html">登出</a></li>
+                        <li><a href="/webpage/Logout.php">登出</a></li>
                     </ul>
                 </li>
             </ul>

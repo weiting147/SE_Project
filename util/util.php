@@ -60,7 +60,7 @@ function CheckEntry($subsystem) {
         header("Location:/index.php");
     }
     else if ($subsystem == "SAS" && $_COOKIE["identity"] != 0) {
-        header("Location:i/ndex.php");
+        header("Location:/index.php");
     }
     else if ($subsystem == "CS" && $_COOKIE["identity"] != 2) {
         header("Location:/index.php");

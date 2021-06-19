@@ -186,7 +186,7 @@ if($cr==1){
 
 $AppID = 0;
 $AppTable = <<<EOF
-    Select * From Application_form;    
+    Select * From Application_Form;    
 EOF;
 $AppTable = GetQueryTable($AppTable);
 $AppID=mysqli_num_rows($AppTable);
@@ -199,7 +199,7 @@ $payState=0;
 if($errorflag==0){
     // sql insert application
     $newApplicant = <<<EOF
-        Insert Into Application_form values ('$acc','$AppID','$peopleNum','$appTime','$uniformNum','$appUnit','$taxNum','$ovenNum','$campNum','$refundState','$checkState','$payState');    
+        Insert Into Application_Form values ('$acc','$AppID','$peopleNum','$appTime','$uniformNum','$appUnit','$taxNum','$ovenNum','$campNum','$refundState','$checkState','$payState');    
     EOF;
     sendQuery($newApplicant);
     

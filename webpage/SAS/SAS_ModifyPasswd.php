@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
-
+<?php
+// 總之你系統管理員R，其它網頁改成 .php 後，通通加上下面這段 code 就對惹。
+set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
+require('util.php');
+CheckEntry("SAS");
+?>
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/Account.css" type="text/css" />
@@ -21,7 +26,7 @@
         <div style="background-color:#f5be11;padding:0.7%; margin: 0px; width: 100%; border: 0%"></div>
         <div class="grayBlock menu">
             <ul>
-                <li><a href="SAS_File.html">歸檔</a></li>
+                <li><a href="SAS_File.php">歸檔</a></li>
                 <li><a href="SAS_AccountManage.html">帳號</a></li>
                 <!-- <li><a href="#">場地列表</a></li> -->
                 <li><a href="SAS_AnnouncementManage.html">公告</a></li>

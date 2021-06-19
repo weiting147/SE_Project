@@ -38,7 +38,7 @@ CheckEntry("SAS");
                             <span>系統管理員</span>
                         </a>
                     <ul>
-                        <li><a href="SAS_ModifyPasswd.html">管理帳戶</a></li>
+                        <li><a href="SAS_ModifyPasswd.php">管理帳戶</a></li>
                         <li><a href="/webpage/Login.php">登出</a></li>
                     </ul>
                 </li>

@@ -123,6 +123,12 @@
                     <p>聯絡單位：</p>
                     <input type="text" style="width: 18em;" readonly="readonly" />
                 </div>
+                <div class = "content">
+                    <p>統一編號：</p>
+                    <input type="text" style="width: 18em;" readonly="readonly"/>
+                    <p>稅籍編號：</p>
+                    <input type="text" style="width: 18em;" readonly="readonly"/>
+                </div>
                 <div class="content">
                     <p>電子信箱：</p>
                     <input type="text" style="width: 28em;" readonly="readonly" />

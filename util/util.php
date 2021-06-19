@@ -33,8 +33,8 @@ function LoginCheck()
         }
         if ($isUser) {
             // 設置 cookie 為60分鐘
-            setcookie("account", $_POST["account"], time() + 3600);
-            setcookie("identity", $row[2], time() + 3600);
+            setcookie("account", $_POST["account"], time() + 3600, '/');
+            setcookie("identity", $row[2], time() + 3600, '/');
             if ($row[2] == 0) {
                 header("Location:SAS/SAS_File.php");
             }

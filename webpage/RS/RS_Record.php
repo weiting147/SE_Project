@@ -4,7 +4,29 @@
 set_include_path($_SERVER["DOCUMENT_ROOT"] . '/util');
 require('util.php');
 CheckEntry("RS");
+
+
+//---------------get account-------------------
+$acc="A1075543";
+
+//---------------------------------------------
+
+//-------------------hi,使用者------------------
+$userNameTable = <<<EOF
+    Select * From Normal_user;    
+EOF;
+$userTable = GetQueryTable($userNameTable);
+
+while($row = mysqli_fetch_row($userTable)) {
+    if ($row[0]==$acc)
+        $userName = $row[1];
+}
+//---------------------------------------------
+
+setcookie('acc', "A1075543", time()+3600);
+setcookie('userName', $userName, time()+3600);
 ?>
+
 <html>
 
 <head>
@@ -28,7 +50,7 @@ CheckEntry("RS");
         <div style="background-color:#f5be11;padding:0.7%; margin: 0px; width: 100%; border: 0%"></div>
         <div class="grayBlock menu">
             <ul>
-                <li><a href="RS_Form.html">租借場地</a></li>
+                <li><a href="RS_Form.php">租借場地</a></li>
                 <li class="grayLi"><a href="RS_Record.html">個人紀錄</a></li>
                 <!-- <li><a href="#">訂單修改/刪除</a></li> -->
                 <li><a href="RS_QueryPlace.html">場地使用狀況</a></li>

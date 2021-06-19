@@ -62,7 +62,7 @@ CheckEntry("PAS");
                     </a>
                     <ul>
                         <li><a href="PAS_ModifyPasswd.php">修改密碼</a></li>
-                        <li><a href="/webpage/Login.php">登出</a></li>
+                        <li><a href="/webpage/Logout.php">登出</a></li>
                     </ul>
                 </li>
             </ul>

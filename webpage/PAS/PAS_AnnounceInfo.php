@@ -33,7 +33,7 @@ $time = $_POST["time"];
                             <li><a href="PAS_FormManage.php">申請批准</a></li>
                             <li><a href="PAS_Record.php">租借紀錄</a></li>
                             <li><a href="PAS_PlaceManage.php">場地管理</a></li>
-                            <li class="grayLi"ㄈ><a href="PAS_AnnouncementManage.php">公告</a></li>
+                            <li class="grayLi"><a href="PAS_AnnouncementManage.php">公告</a></li>
                         </ul>
                 <!-- 下拉式選單 -->
                 <ul class = "dropDown">
@@ -42,7 +42,7 @@ $time = $_POST["time"];
                         </a>
                         <ul>
                             <li><a href="PAS_ModifyPasswd.php">修改密碼</a></li>
-                            <li><a href="/webpage/Login.php">登出</a></li>
+                            <li><a href="/webpage/Logout.php">登出</a></li>
                         </ul>
                     </li>
                 </ul>

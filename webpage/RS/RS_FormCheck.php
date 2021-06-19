@@ -237,6 +237,9 @@ if($errorflag==0){
 }
 else{
     //echo $errorflag;
+    $url="RS_Form.php";
+    echo "<script>alert('欄位有誤')</script>";
+    echo "<script>window.location.href = '$url'</script>";
 }
 
 ?>

@@ -5,6 +5,7 @@ require('util.php');
 CheckEntry("RS");
 
 $appTime = date('Y/m/d H:i:s');
+$day = date('Y/m/d',strtotime('+7 day'));
 
 $acc=$_COOKIE['acc'];
 $userName=$_COOKIE['userName'];
@@ -14,7 +15,12 @@ $Address=$_COOKIE['Address'];
 $studentID=$_COOKIE['studentID'];
 
 $appUnit=$_POST['appUnit'];
+$uniformNum="無";
+$uniformNum=$_POST['uniformNum'];
+$taxNum="無";
+$taxNum=$_POST['taxNum'];
 $peopleNum=$_POST['peopleNum'];
+$receiptPayer="無";
 $receiptPayer=$_POST['receiptPayer'];
 $or=$_POST['or'];
 $oRentY=$_POST['oRentY'];
@@ -30,58 +36,187 @@ $cReturnY=$_POST['cReturnY'];
 $cReturnM=$_POST['cReturnM'];
 $cReturnD=$_POST['cReturnD'];
 $cNum=$_POST['cNum'];
+$th=0;
 $thing=$_POST['thing'];
+$th2=0;
 $thing2=$_POST['thing2'];
+$th3=0;
 $thing3=$_POST['thing3'];
+$th4=0;
 $thing4=$_POST['thing4'];
+$th5=0;
 $thing5=$_POST['thing5'];
+$th6=0;
 $thing6=$_POST['thing6'];
+$ca=0;
 $camp=$_POST['camp'];
+$ca2=0;
 $camp2=$_POST['camp2'];
+$ca3=0;
 $camp3=$_POST['camp3'];
+$ca4=0;
 $camp4=$_POST['camp4'];
+$ca5=0;
 $camp5=$_POST['camp5'];
+$ca6=0;
 $camp6=$_POST['camp6'];
 
 $ovenNum=0;
-if($thing=='valuable')
+if($thing=='valuable'){
+    $th=1;
     $ovenNum++;
-if($thing2=='valuable')
+}
+if($thing2=='valuable'){
+    $th2=1;
     $ovenNum++;
-if($thing3=='valuable')
+}
+if($thing3=='valuable'){
+    $th3=1;
     $ovenNum++;
-if($thing4=='valuable')
+}
+if($thing4=='valuable'){
+    $th4=1;
     $ovenNum++;
-if($thing5=='valuable')
+}
+if($thing5=='valuable'){
+    $th5=1;
     $ovenNum++;
-if($thing6=='valuable')
+}
+if($thing6=='valuable'){
+    $th6=1;
     $ovenNum++;
+}
 
 $campNum=0;
-if($camp=='valuable')
+if($camp=='valuable'){
+    $ca=1;
     $campNum++;
-if($camp2=='valuable')
+}
+if($camp2=='valuable'){
+    $ca2=1;
     $campNum++;
-if($camp3=='valuable')
+}
+if($camp3=='valuable'){
+    $ca3=1;
     $campNum++;
-if($camp4=='valuable')
+}
+if($camp4=='valuable'){
+    $ca4=1;
     $campNum++;
-if($camp5=='valuable')
+}
+if($camp5=='valuable'){
+    $ca5=1;
     $campNum++;
-if($camp6=='valuable')
+}
+if($camp6=='valuable'){
+    $ca6=1;
     $campNum++;
+}
 
-echo $ovenNum.'<br>';
-echo $campNum.'<br>';
+//-----------------判斷---------------------
+$errorflag=0;
+if($ovenNum!=$oNum && $or==1){
+    $errorflag=1;
+}
+if($campNum!=$cNum && $cr==1){
+    $errorflag=2;
+}
+if(isset($peopleNum)==false){
+    $errorflag=3;
+}
+else if($peopleNum<=0){
+    $errorflag=4;
+}
+if($peopleNum/10>$oNum){
+    $errorflag=5;
+}
+if($or==1){
+    if(isset($oRentY)==false || isset($oRentM)==false || isset($oRentD)==false){
+        $errorflag=6;
+    }
+    else if($oRentM>12 || $oRentM<1 ||$oRentD>31 ||$oRentD<1){
+        $errorflag=7;
+    }
+    else{
+        $oRent=$oRentY.'/'.$oRentM.'/'.$oRentD;
+    }
+}
+else{
+    $oRentY=null;
+    $oRentM=null;
+    $oRentD=null;
+    $oNum=null;
+}
+if($cr==1){
+    if(isset($cRentY)==false || isset($cRentM)==false || isset($cRentD)==false){
+        $errorflag=8;
+    }
+    else if($cRentM>12 || $cRentM<1 ||$cRentD>31 ||$cRentD<1){
+        $errorflag=9;
+    }
+    else{
+        $cRent=$cRentY.'/'.$cRentM.'/'.$cRentD;
+    }
+    if(isset($cReturnY)==false || isset($cReturnM)==false || isset($cReturnD)==false){
+        $errorflag=10;
+    }
+    else{
+        $cReturn=$cReturnY.'/'.$cReturnM.'/'.$cReturnD;
+    }
+}
+else{
+    $cRentY=null;
+    $cRentM=null;
+    $cRentD=null;
+    $cReturnY=null;
+    $cReturnM=null;
+    $cReturnD=null;
+    $cNum=null;
+}
+//租借時間<=現在時間+7
+//歸還時間<=租借時間
+if($or==1){
+    if(strtotime($oRent)<=strtotime($day)){
+        $errorflag=11;
+    }
+}
+if($cr==1){
+    if(strtotime($cRent)<=strtotime($day)){
+        $errorflag=12;
+    }
+    if(strtotime($cReturn)<strtotime($cRent)){
+        $errorflag=13;
+    }
+}
+//--------------------------------------
 
 
-// sql insert application
 
-//$newApplicant = <<<EOF
-    //Insert Into Applicant_form values ('$acc','001','$peopleNum','$appTime','統編','$appUnit','TaxNumber','$ovenNum','$campNum',0,0,0);    
-//EOF;
+$AppID = 0;
+$AppTable = <<<EOF
+    Select * From Application_form;    
+EOF;
+$AppTable = GetQueryTable($AppTable);
+$AppID=mysqli_num_rows($AppTable);
+$AppID++;
 
-//$ret = sendQuery($newApplicant);
+$refundState=0;
+$checkState=0;
+$payState=0;
+
+
+if($errorflag==0){
+    // sql insert application
+    $newApplicant = <<<EOF
+        Insert Into Application_form values ('$acc','$AppID','$peopleNum','$appTime','$uniformNum','$appUnit','$taxNum','$ovenNum','$campNum','$refundState','$checkState','$payState');    
+    EOF;
+
+    sendQuery($newApplicant);
+    //rent detail insert
+}
+else{
+    echo $errorflag;
+}
 
 ?>
 <html>
@@ -168,9 +303,13 @@ echo $campNum.'<br>';
                 </div>
                 <div class = "content">
                     <p>統一編號：</p>
-                    <input type="text" style="width: 18em;" readonly="readonly"/>
+                    <?php
+                    echo "<input type=\"text\" style=\"width: 18em;\" readonly=\"readonly\" value=\"$uniformNum\"/>";
+                    ?>
                     <p>稅籍編號：</p>
-                    <input type="text" style="width: 18em;" readonly="readonly"/>
+                    <?php
+                    echo "<input type=\"text\" style=\"width: 18em;\" readonly=\"readonly\" value=\"$taxNum\"/>";
+                    ?>
                 </div>
                 <div class="content">
                     <p>電子信箱：</p>
@@ -336,7 +475,7 @@ echo $campNum.'<br>';
                             <span style="font-weight: bold;">租借烤爐</span>
                         </div>
                         <div class="stateflex">
-                            <div>
+                            <div class="grayscale">
                                 <p class="index">1.</p>
                                 <img src="/asset/烤爐去背.png" />
                                 <div class="price">$$$</div>

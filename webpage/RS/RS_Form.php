@@ -40,8 +40,8 @@ setcookie('Phone', $Phone, time()+3600);
 setcookie('Address', $Address, time()+3600);
 setcookie('studentID', $studentID, time()+3600);
 
-$today = date('Y/m/d H:i:s');
-echo $today;
+
+
 ?>
 
 <html>
@@ -117,9 +117,9 @@ echo $today;
                 </div>
                 <div class = "content">
                     <p>統一編號：</p>
-                    <input type="text" style="width: 18em;"/>
+                    <input type="text" style="width: 18em;" name='uniformNum'/>
                     <p>稅籍編號：</p>
-                    <input type="text" style="width: 18em;"/>
+                    <input type="text" style="width: 18em;" name='taxNum'/>
                 </div>
                 <div class="content">
                     <p>電子信箱：</p>

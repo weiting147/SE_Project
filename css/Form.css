@@ -175,3 +175,6 @@ input[type="checkbox"]:checked + label::after {
     color: #707070;
     text-align: center !important;
 }
+.grayscale{
+-webkit-filter: grayscale(1);
+}

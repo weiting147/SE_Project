@@ -117,7 +117,7 @@ if(isset($peopleNum)==false){
 else if($peopleNum<=0){
     $errorflag=4;
 }
-if($peopleNum/10>$oNum){
+if($peopleNum/10>$oNum && $or!=0){
     $errorflag=5;
 }
 if($or==1){
@@ -128,9 +128,8 @@ if($or==1){
         $errorflag=7;
     }
     else{
-        $oRent=$oRentY.'/'.$oRentM.'/'.$oRentD;
-        $oReturnD=$oRentD+1;
-        $oReturn=$oRentY.'/'.$oRentM.'/'.$oReturnD;
+        $oRent=$oRentY.'-'.$oRentM.'-'.$oRentD;
+        $oReturn=$oRent;
     }
 }
 else{
@@ -147,13 +146,13 @@ if($cr==1){
         $errorflag=9;
     }
     else{
-        $cRent=$cRentY.'/'.$cRentM.'/'.$cRentD;
+        $cRent=$cRentY.'-'.$cRentM.'-'.$cRentD;
     }
     if(isset($cReturnY)==false || isset($cReturnM)==false || isset($cReturnD)==false){
         $errorflag=10;
     }
     else{
-        $cReturn=$cReturnY.'/'.$cReturnM.'/'.$cReturnD;
+        $cReturn=$cReturnY.'-'.$cReturnM.'-'.$cReturnD;
     }
 }
 else{
@@ -196,6 +195,7 @@ $refundState=0;
 $checkState=0;
 $payState=0;
 
+
 if($errorflag==0){
     // sql insert application
     $newApplicant = <<<EOF
@@ -205,9 +205,15 @@ if($errorflag==0){
     
     //rent detail insert
     if($oNum>0){
-        for($i=0;$i<$oNum;$i++){
+        $startT=explode(':',$oRentT);
+        $oRent=$oRent.' '.$startT[0].":00:00";
+        $endT=explode(' ',$startT[1]);
+        $oReturn=$oReturn.' '.$endT[2].":00:00";
+        for($i=0;$i<6;$i++){
             if($th[$i]==1){
                 $thi=$i+1;
+                $thi=str_pad($thi,3,"0",STR_PAD_LEFT);
+                $thi="BBQ".$thi;
                 $newApplicant = <<<EOF
                     Insert Into Rent_detail values ('$AppID','$thi','$oRent','$oReturn');    
                 EOF;
@@ -216,9 +222,11 @@ if($errorflag==0){
         }
     }
     if($cNum>0){
-        for($i=0;$i<$cNum;$i++){
+        for($i=0;$i<6;$i++){
             if($ca[$i]==1){
                 $cai=$i+1;
+                $cai=str_pad($cai,3,"0",STR_PAD_LEFT);
+                $cai="Camp".$cai;
                 $newApplicant = <<<EOF
                     Insert Into Rent_detail values ('$AppID','$cai','$cRent','$cReturn');    
                 EOF;

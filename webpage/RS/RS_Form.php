@@ -187,9 +187,9 @@ setcookie('studentID', $studentID, time()+3600);
                     <span style="font-weight: bold;"> 是否租借露營區？</span> &nbsp;&nbsp;
                     <!--空格-->
                     <label for="r3">是</label>
-                    <input type="radio" id="r3" name="cr" /> &nbsp;&nbsp;
+                    <input type="radio" id="r3" name="cr" value=1/> &nbsp;&nbsp;
                     <label for="r4">否</label>
-                    <input type="radio" id="r4" name="cr" />
+                    <input type="radio" id="r4" name="cr" value=0/>
                 </div>
                 <div class="content">
                     <div class="contentflex" style="width: 55em;">

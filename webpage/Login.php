@@ -24,6 +24,11 @@ if ($_COOKIE["account"]) {
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/Login.css" type="text/css" />
+    <script type="text/javascript">
+        function submitForm(formName) {
+            document.getElementById(formName).submit();
+        }
+    </script>
     <meta charset="utf-8">
     <title>Login</title>
 </head>
@@ -44,7 +49,7 @@ if ($_COOKIE["account"]) {
         <div class="grayBlock menu">
             <ul>
                 <li class="grayLi"><a href="Login.php">公告</a></li>
-                <li><a href="/webpage/RS/RS_QueryPlaceIntro.html">介紹</a></li>
+                <li><a href="/webpage/RS/RS_QueryPlaceIntro.php">介紹</a></li>
             </ul>
         </div>
     </header>
@@ -59,48 +64,36 @@ if ($_COOKIE["account"]) {
                     <div style="padding-left: 2em;">發布者</div>
                     <div>發布日期</div>
                 </div>
-                <a href="/webpage/RS/RS_QueryAnnouncement.html">
-                    <div class="lst">
-                        <div style="width: 350px; ">[公告]你各位阿都給我好好待在家防疫 :/</div>
-                        <div>場地管理員</div>
-                        <div>2020-05-09</div>
-                    </div>
-                </a>
-                <a href="/webpage/RS/RS_QueryAnnouncement.html">
-                    <div class="lst">
-                        <div style="width: 350px; ">[公告]本土疫情爆發啦!關於借場消息看這裡</div>
-                        <div>場地管理員</div>
-                        <div>2021-05-02</div>
-                    </div>
-                </a>
-                <a href="/webpage/RS/RS_QueryAnnouncement.html">
-                    <div class="lst">
-                        <div style="width: 350px; ">[公告]我也不知道要暫放甚麼啾咪</div>
-                        <div>系統管理員</div>
-                        <div>2021-03-20</div>
-                    </div>
-                </a>
-                <a href="/webpage/RS/RS_QueryAnnouncement.html">
-                    <div class="lst">
-                        <div style="width: 350px; ">[公告]過長測試 過長測試 過長測試 過長測試 過長測試</div>
-                        <div>系統管理員</div>
-                        <div>2020-12-29</div>
-                    </div>
-                </a>
-                <a href="/webpage/RS/RS_QueryAnnouncement.html">
-                    <div class="lst">
-                        <div style="width: 350px; ">[公告]我也不知道要暫放甚麼&gt &lt</div>
-                        <div>系統管理員</div>
-                        <div>2021-01-13</div>
-                    </div>
-                </a>
-                <a href="/webpage/RS/RS_QueryAnnouncement.html">
-                    <div class="lst">
-                        <div style="width: 350px; ">[公告]我也不知道要暫放甚麼ouo</div>
-                        <div>場地管理員</div>
-                        <div>2020-12-10</div>
-                    </div>
-                </a>
+                <?php
+                $currentYear = date('Y');
+                $announceQuery = sprintf(<<<EOF
+                Select * From Announcement Where ReleaseTime Like '$currentYear-%-%' Order By identity asc, ReleaseTime desc;
+                EOF, $year, $month);
+                $announceTable = GetQueryTable($announceQuery);
+                while ($row = mysqli_fetch_row($announceTable)) {
+                    $title = $row[3];
+                    $text = $row[4];
+                    $date = "";
+                    $time = "";
+                    sscanf($row[2], "%s %s", $date, $time);
+                    $author = "場地管理員";
+                    if ($row[0] == 0)
+                        $author = "系統管理員";
+                    echo <<<EOF
+                <form id="$row[0]_$row[1]" action="RS/RS_QueryAnnouncement.php" method="POST">
+                <div class = "lst" onclick="submitForm('$row[0]_$row[1]');">
+                    <div style="width: 350px;">[公告]$title</div>
+                    <div>$author</div>
+                    <div>$date</div>
+                </div>
+                <input type="hidden" name="title" value="$title" readonly="readonly"/>
+                <input type="hidden" name="text" value="$text" readonly="readonly"/>
+                <input type="hidden" name="date" value="$date" readonly="readonly"/>
+                <input type="hidden" name="time" value="$time" readonly="readonly"/>
+                </form>
+                EOF;
+                }
+                ?>
             </div>
 
         </div>

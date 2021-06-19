@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
-
+<?php
+$title = $_POST["title"];
+$text = $_POST["text"];
+$date = $_POST["date"];
+$time = $_POST["time"];
+?>
 <head>
     <link rel="stylesheet" href="/css/reset.css" type="text/css" />
     <link rel="stylesheet" href="/css/Form.css" type="text/css" />
@@ -23,8 +28,8 @@
         <div style="background-color:#f5be11;padding:0.7%; margin: 0px; width: 100%; border: 0%"></div>
         <div class="grayBlock menu">
             <ul>
-                <li class="grayLi"><a href="/webpage//Login.php">公告</a></li>
-                <li><a href="RS_QueryPlaceIntro.html">介紹</a></li>
+                <li class="grayLi"><a href="/webpage/Login.php">公告</a></li>
+                <li><a href="RS_QueryPlaceIntro.php">介紹</a></li>
             </ul>
         </div>
     </header>
@@ -38,27 +43,27 @@
                 </p>
                 <!-- 申請單內容 -->
 
-                <div class="content">
-                    <p> 標題：</p>
-                    <input type="text" style="width: 40em;" readonly="readonly" />
-                </div>
-                <div class="content">
-                    <p> 發布者：</p>
-                    <input type="text" style="width: 15em;" readonly="readonly" value="系統管理員" />
-                    <p style="margin-left: 1em;"> 發布時間：</p>
-                    <input type="text" style="width: 15em;" readonly="readonly" />
-                </div>
+                <div class = "content">
+                        <p> 標題：</p>
+                        <input type="text" value="<?php echo $title;?>"  style="width: 40em;" readonly="readonly"/>
+                    </div>
+                    <div class = "content">
+                        <p> 發布者：</p>
+                        <input type="text" style="width: 15em;" readonly="readonly" value = "場地管理員"/>
+                        <p style="margin-left: 1em;"> 發布時間：</p>
+                        <input type="text" value="<?php echo $date." " . $time;?>"  style="width: 15em;" readonly="readonly"/>
+                    </div>
+                    
+                    <div class = "content">
+                        <p> 內文：</p>
+                        <!-- <input type="text" style="width: 40em;"/> -->
 
-                <div class="content">
-                    <p> 內文：</p>
-                    <!-- <input type="text" style="width: 40em;"/> -->
-
-                    <textarea name="Content" readonly="readonly" style="width:40em;height:20em;">公告內容的啦</textarea>
-                </div>
+                        <textarea name="Content" readonly="readonly" style="width:40em;height:20em;"><?php echo $text;?> </textarea>
+                    </div>
             </div>
             <!-- 確認鍵 -->
             <div>
-                <a href="/webpage//Login.php"><button type="button" style="cursor: pointer; margin-top: 2em;">確認</button></a>
+                <a href="/webpage/Login.php"><button type="button" style="cursor: pointer; margin-top: 2em;">確認</button></a>
             </div>
         </div>
     </div>
